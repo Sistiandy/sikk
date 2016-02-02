@@ -151,6 +151,97 @@ CREATE  TABLE IF NOT EXISTS `posts` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `student`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `student` (
+  `student_id` INT NOT NULL AUTO_INCREMENT ,
+  `student_nip` VARCHAR(45) NULL ,
+  `student_name` VARCHAR(255) NULL ,
+  `student_password` VARCHAR(45) NULL ,
+  `student_phone` VARCHAR(45) NULL ,
+  `student_email` VARCHAR(45) NULL ,
+  `student_address` TEXT NULL ,
+  `student_is_deleted` TINYINT(1) NULL ,
+  `user_user_id` INT(11) NULL ,
+  `student_input_date` TIMESTAMP NULL ,
+  `student_last_update` TIMESTAMP NULL ,
+  PRIMARY KEY (`student_id`) ,
+  INDEX `fk_student_user1_idx` (`user_user_id` ASC) ,
+  CONSTRAINT `fk_student_user1`
+    FOREIGN KEY (`user_user_id` )
+    REFERENCES `user` (`user_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `periode`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `periode` (
+  `periode_id` INT NOT NULL AUTO_INCREMENT ,
+  `periode_date` DATE NULL ,
+  `periode_total_budget` DECIMAL(13) NULL DEFAULT 0 ,
+  `periode_description` VARCHAR(45) NULL ,
+  `user_user_id` INT(11) NULL ,
+  `periode_input_date` TIMESTAMP NULL ,
+  `periode_last_update` TIMESTAMP NULL ,
+  PRIMARY KEY (`periode_id`) ,
+  INDEX `fk_periode_user1_idx` (`user_user_id` ASC) ,
+  CONSTRAINT `fk_periode_user1`
+    FOREIGN KEY (`user_user_id` )
+    REFERENCES `user` (`user_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `periode_transaction`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `periode_transaction` (
+  `transaction_id` INT NOT NULL AUTO_INCREMENT ,
+  `transaction_is_late` TINYINT(1) NULL DEFAULT 0 COMMENT '0=Tidak telat, 1=Telat' ,
+  `periode_periode_id` INT NULL ,
+  `student_student_id` INT NULL ,
+  `transaction_input_date` TIMESTAMP NULL ,
+  `transaction_last_update` TIMESTAMP NULL ,
+  `user_user_id` INT(11) NULL ,
+  PRIMARY KEY (`transaction_id`) ,
+  INDEX `fk_periode_has_student_student1_idx` (`student_student_id` ASC) ,
+  INDEX `fk_periode_has_student_periode1_idx` (`periode_periode_id` ASC) ,
+  INDEX `fk_periode_transaction_user1_idx` (`user_user_id` ASC) ,
+  CONSTRAINT `fk_periode_has_student_periode1`
+    FOREIGN KEY (`periode_periode_id` )
+    REFERENCES `periode` (`periode_id` )
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
+  CONSTRAINT `fk_periode_has_student_student1`
+    FOREIGN KEY (`student_student_id` )
+    REFERENCES `student` (`student_id` )
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
+  CONSTRAINT `fk_periode_transaction_user1`
+    FOREIGN KEY (`user_user_id` )
+    REFERENCES `user` (`user_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `class_setting`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `class_setting` (
+  `setting_id` INT NOT NULL AUTO_INCREMENT ,
+  `setting_name` VARCHAR(255) NULL ,
+  `setting_value` TEXT NULL ,
+  `setting_last_update` TIMESTAMP NULL ,
+  PRIMARY KEY (`setting_id`) )
+ENGINE = InnoDB;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
