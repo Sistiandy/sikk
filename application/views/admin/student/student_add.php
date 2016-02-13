@@ -18,7 +18,7 @@ if (isset($student)) {
         <?php if (!isset($student)) echo validation_errors(); ?>
         <?php echo form_open_multipart(current_url()); ?>
         <div>
-            <h3><?php echo $operation; ?> Pelajar</h3><br>
+            <h3><?php echo $operation; ?> Mahasiswa</h3><br>
         </div>
 
         <div class="row">
