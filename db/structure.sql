@@ -198,9 +198,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `periode_transaction`
+-- Table `input_transaction`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `periode_transaction` (
+CREATE  TABLE IF NOT EXISTS `input_transaction` (
   `transaction_id` INT NOT NULL AUTO_INCREMENT ,
   `transaction_is_late` TINYINT(1) NULL DEFAULT 0 COMMENT '0=Tidak telat, 1=Telat' ,
   `periode_periode_id` INT NULL ,
@@ -239,6 +239,28 @@ CREATE  TABLE IF NOT EXISTS `class_setting` (
   `setting_value` TEXT NULL ,
   `setting_last_update` TIMESTAMP NULL ,
   PRIMARY KEY (`setting_id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `output_transaction`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `output_transaction` (
+  `output_transaction_id` INT NOT NULL AUTO_INCREMENT ,
+  `transaction_title` VARCHAR(255) NULL ,
+  `transaction_date` TIMESTAMP NULL ,
+  `transaction_description` TEXT NULL ,
+  `transaction_budget` DECIMAL(13) NULL ,
+  `user_user_id` INT(11) NULL ,
+  `transaction_input_date` TIMESTAMP NULL ,
+  `transaction_last_update` TIMESTAMP NULL ,
+  PRIMARY KEY (`output_transaction_id`) ,
+  INDEX `fk_output_transaction_user1_idx` (`user_user_id` ASC) ,
+  CONSTRAINT `fk_output_transaction_user1`
+    FOREIGN KEY (`user_user_id` )
+    REFERENCES `user` (`user_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
