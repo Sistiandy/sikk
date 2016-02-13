@@ -20,6 +20,7 @@
             <li><a><i class="fa fa-users"></i> Transaksi <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo site_url('admin/input_transaction') ?>">Input Transaksi</a>
+                    <li><a href="<?php echo site_url('admin/output_transaction') ?>">Output Transaksi</a>
                     </li>
                 </ul>
             </li>
