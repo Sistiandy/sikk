@@ -1,7 +1,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
     <div class="x_panel post-inherit">
         <h3>
-            Daftar Pelajar
+            Daftar Mahasiswa
             <a href="<?php echo site_url('admin/student/add'); ?>" ><span class="glyphicon glyphicon-plus-sign"></span></a>
         </h3>
 

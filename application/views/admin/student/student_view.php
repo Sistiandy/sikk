@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h3>
-                    Detail Pelajar
+                    Detail Mahasiswa
                 </h3>
             </div>
             <div class="col-md-4">
