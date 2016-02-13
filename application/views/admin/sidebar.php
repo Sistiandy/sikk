@@ -17,6 +17,13 @@
                 </ul>
             </li>
 
+            <li><a><i class="fa fa-users"></i> Transaksi <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo site_url('admin/input_transaction') ?>">Input Transaksi</a>
+                    </li>
+                </ul>
+            </li>
+
             <li><a><i class="fa fa-users"></i> Periode Kas <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo site_url('admin/periode') ?>">Daftar Periode</a>
@@ -27,27 +34,27 @@
             <li><a><i class="fa fa-newspaper-o"></i> Posting <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo site_url('admin/posts') ?>">Daftar Posting</a>
-                    <li><a href="<?php echo site_url('admin/posts/category') ?>">Category Posting</a>
+                        <li><a href="<?php echo site_url('admin/posts/category') ?>">Category Posting</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li><a><i class="fa fa-picture-o"></i> Media Manager <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none">
+                        <li><a href="<?php echo site_url('admin/media_manager') ?>">Image List</a>
+                            <li><a href="<?php echo site_url('admin/media_album') ?>">Album List</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><a><i class="fa fa-users"></i> Pengguna <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="<?php echo site_url('admin/user') ?>">Daftar Pengguna</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
-            </li>
+            </div>
 
-            <li><a><i class="fa fa-picture-o"></i> Media Manager <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('admin/media_manager') ?>">Image List</a>
-                    <li><a href="<?php echo site_url('admin/media_album') ?>">Album List</a>
-                    </li>
-                </ul>
-            </li>
-
-            <li><a><i class="fa fa-users"></i> Pengguna <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('admin/user') ?>">Daftar Pengguna</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-
-</div>
+        </div>
 <!-- /sidebar menu -->
