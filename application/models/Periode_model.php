@@ -47,7 +47,7 @@ class Periode_model extends CI_Model {
             $this->db->order_by('periode_last_update', 'desc');
         }
 
-        $this->db->select('periode.periode_id, periode_date, periode_total_budget, 
+        $this->db->select('periode.periode_id, periode_date, periode_total_budget, periode_description,
             periode_input_date, periode_last_update');
         $this->db->select('user_user_id, user_name');
         $this->db->join('user', 'user.user_id = periode.user_user_id', 'left');

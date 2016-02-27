@@ -26,12 +26,7 @@
                             <td>Total yang didapat</td>
                             <td>:</td>
                             <td><?php echo 'Rp ' . number_format($periode['periode_total_budget'], 2, ',', '.') ?></td>
-                        </tr>
-                        <tr>
-                            <td>No. Telepon</td>
-                            <td>:</td>
-                            <td><?php echo $periode['periode_phone'] ?></td>
-                        </tr>
+                        </tr>                       
                         <tr>
                             <td>Keterangan</td>
                             <td>:</td>
@@ -40,7 +35,7 @@
                         <tr>
                             <td>Tanggal dibuat</td>
                             <td>:</td>
-                            <td><?php echo $periode['periode_last_update'] ?></td>
+                            <td><?php echo pretty_date($periode['periode_last_update'], 'l, d F Y', FALSE) ?></td>
                         </tr>
                         <tr>
                             <td>Penulis</td>
