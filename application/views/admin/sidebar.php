@@ -48,6 +48,13 @@
                         </ul>
                     </li>
 
+                    <li><a><i class="fa fa-gear"></i> Pengaturan <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="<?php echo site_url('admin/setting') ?>">Pengaturan Dasar</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li><a><i class="fa fa-users"></i> Pengguna <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
                             <li><a href="<?php echo site_url('admin/user') ?>">Daftar Pengguna</a>

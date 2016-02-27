@@ -18,7 +18,7 @@ class Input_transaction extends CI_Controller {
         if ($this->session->userdata('logged') == NULL) {
             header("Location:" . site_url('admin/auth/login') . "?location=" . urlencode($_SERVER['REQUEST_URI']));
         }
-        $this->load->model(array('Input_transaction_model', 'Activity_log_model'));
+        $this->load->model(array('Input_transaction_model', 'Periode_model', 'Student_model', 'Activity_log_model'));
         $this->load->library('upload');
     }
 
@@ -47,6 +47,7 @@ class Input_transaction extends CI_Controller {
 
     // Add Input_transaction and Update
     public function add($id = NULL) {
+        $this->load->model('Setting_model');
         $this->load->library('form_validation');
         $this->form_validation->set_rules('periode_id', 'Periode', 'trim|required|xss_clean');
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>', '</div>');
@@ -59,24 +60,34 @@ class Input_transaction extends CI_Controller {
             } else {
                 $params['transaction_input_date'] = date('Y-m-d H:i:s');
             }
+            $cash = $this->Setting_model->get(array('id' => CLASS_CASH));
+            $student = $_POST['student_id'];
+            $cpt = count($_POST['student_id']);
+            for ($i = 0; $i < $cpt; $i++) {
+                $params['increase_budget'] = $cash['setting_value'];
+                $params['user_id'] = $this->session->userdata('user_id');
+                $params['transaction_last_update'] = date('Y-m-d H:i:s');
+                $params['transaction_date'] = $this->input->post('transaction_date');
+                $params['transaction_description'] = $this->input->post('transaction_description');
+                $params['periode_id'] = $this->input->post('periode_id');
+                $params['student_id'] = $student[$i];
+                $status = $this->Input_transaction_model->add($params);
+                if (!$this->input->post('transaction_id')) {
+                    $this->Student_model->add($params);
+                }
 
-            $params['user_id'] = $this->session->userdata('user_id');
-            $params['transaction_last_update'] = date('Y-m-d H:i:s');
-            $params['transaction_date'] = $this->input->post('transaction_date');
-            $params['transaction_description'] = $this->input->post('transaction_description');
-            $status = $this->Input_transaction_model->add($params);
 
-
-            // activity log
-            $this->Activity_log_model->add(
-                    array(
-                        'log_date' => date('Y-m-d H:i:s'),
-                        'user_id' => $this->session->userdata('user_id'),
-                        'log_module' => 'Input_transaction',
-                        'log_action' => $data['operation'],
-                        'log_info' => 'ID:null;Date:' . $params['transaction_date']
-                    )
-            );
+                // activity log
+                $this->Activity_log_model->add(
+                        array(
+                            'log_date' => date('Y-m-d H:i:s'),
+                            'user_id' => $this->session->userdata('user_id'),
+                            'log_module' => 'Input_transaction',
+                            'log_action' => $data['operation'],
+                            'log_info' => 'ID:null;Date:' . $params['transaction_date']
+                        )
+                );
+            }
 
             $this->session->set_flashdata('success', $data['operation'] . ' Transaksi Kas berhasil');
             redirect('admin/input_transaction');
@@ -89,6 +100,9 @@ class Input_transaction extends CI_Controller {
             if (!is_null($id)) {
                 $data['input_transaction'] = $this->Input_transaction_model->get(array('id' => $id));
             }
+            $data['ngapp'] = 'ng-app="inputApp"';
+            $data['periode'] = $this->Periode_model->get();
+            $data['student'] = $this->Student_model->get();
             $data['title'] = $data['operation'] . ' Transaksi Kas';
             $data['main'] = 'admin/input_transaction/input_transaction_add';
             $this->load->view('admin/layout', $data);

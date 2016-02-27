@@ -22,4 +22,4 @@ INSERT INTO `user` (`user_id`, `user_name`, `user_full_name`, `user_password`, `
 INSERT INTO `class_setting` (`setting_id`, `setting_name`, `setting_value`, `setting_last_update`) VALUES
 (1, 'class_name', '-', NOW()),
 (2, 'class_description', '-', NOW()),
-(3, 'class_budget', 0, NOW());
+(3, 'class_cash', 5000, NOW());

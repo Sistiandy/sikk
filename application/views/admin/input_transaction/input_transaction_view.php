@@ -9,7 +9,7 @@
             <div class="col-md-4">
                 <span class=" pull-right">
                     <a href="<?php echo site_url('admin/input_transaction') ?>" class="btn btn-info"><span class="fa fa-arrow-left"></span>&nbsp; Kembali</a> 
-                    <a href="<?php echo site_url('admin/input_transaction/edit/' . $input_transaction['input_transaction_id']) ?>" class="btn btn-success"><span class="fa fa-edit"></span>&nbsp; Edit</a> 
+                    <a href="<?php echo site_url('admin/input_transaction/edit/' . $input_transaction['transaction_id']) ?>" class="btn btn-success"><span class="fa fa-edit"></span>&nbsp; Edit</a> 
                 </span>
             </div>
         </div><br>
@@ -25,17 +25,17 @@
                         <tr>
                             <td>Mahasiswa</td>
                             <td>:</td>
-                            <td><?php echo $row['student_name'] ?></td>
+                            <td><?php echo $input_transaction['student_name'] ?></td>
                         </tr>
                         <tr>
                             <td>Tunggakan</td>
                             <td>:</td>
-                            <td><?php echo ($row['transaction_is_late'] == TRUE)? 'Ya' : 'Tidak' ?></td>
+                            <td><?php echo ($input_transaction['transaction_is_late'] == TRUE)? 'Ya' : 'Tidak' ?></td>
                         </tr>
                         <tr>
                             <td>Tanggal diinput</td>
                             <td>:</td>
-                            <td><?php echo $input_transaction['input_transaction_input_date'] ?></td>
+                            <td><?php echo $input_transaction['transaction_input_date'] ?></td>
                         </tr>
                         <tr>
                             <td>Penulis</td>

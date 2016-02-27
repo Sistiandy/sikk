@@ -22,11 +22,11 @@
                         ?>
                         <tbody>
                             <tr>
-                                <td ><?php echo pretty_date($row['input_transaction_date'], 'd F Y', FALSE); ?></td>
+                                <td ><?php echo pretty_date($row['periode_date'], 'd F Y', FALSE); ?></td>
                                 <td ><?php echo $row['student_name']; ?></td>
                                 <td>
-                                    <a class="btn btn-warning btn-xs" href="<?php echo site_url('admin/input_transaction/detail/' . $row['input_transaction_id']); ?>" ><span class="glyphicon glyphicon-eye-open"></span></a>
-                                    <a class="btn btn-success btn-xs" href="<?php echo site_url('admin/input_transaction/edit/' . $row['input_transaction_id']); ?>" ><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a class="btn btn-warning btn-xs" href="<?php echo site_url('admin/input_transaction/detail/' . $row['transaction_id']); ?>" ><span class="glyphicon glyphicon-eye-open"></span></a>
+                                    <a class="btn btn-success btn-xs" href="<?php echo site_url('admin/input_transaction/edit/' . $row['transaction_id']); ?>" ><span class="glyphicon glyphicon-edit"></span></a>
                                 </td>
                             </tr>
                         </tbody>

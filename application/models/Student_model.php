@@ -105,6 +105,14 @@ class Student_model extends CI_Model {
             $this->db->set('student_address', $data['student_address']);
         }
         
+         if(isset($data['student_budget'])) {
+            $this->db->set('student_budget', $data['student_budget']);
+        }
+
+        if (isset($data['increase_budget'])) {
+            $this->db->set('student_budget', 'student_budget +' . $data['increase_budget'], FALSE);
+        }
+        
          if(isset($data['student_is_deleted'])) {
             $this->db->set('student_is_deleted', $data['student_is_deleted']);
         }

@@ -18,7 +18,7 @@ class Student extends CI_Controller {
         if ($this->session->userdata('logged') == NULL) {
             header("Location:" . site_url('admin/auth/login') . "?location=" . urlencode($_SERVER['REQUEST_URI']));
         }
-        $this->load->model(array('Student_model', 'Activity_log_model'));
+        $this->load->model(array('Student_model', 'Input_transaction_model', 'Activity_log_model'));
         $this->load->library('upload');
     }
 
@@ -124,6 +124,32 @@ class Student extends CI_Controller {
             $this->session->set_flashdata('delete', 'Delete');
             redirect('admin/student/edit/' . $id);
         }
+    }
+
+    public function get_student($id = NULL) {
+        if ($id == NULL) {
+            $res = $this->Student_model->get();
+        } else {
+            $student = $this->Input_transaction_model->get(array('periode_id' => $id));
+            $students = $this->Student_model->get();
+            
+            $res_student = array();
+            foreach ($student as $row) {
+                $res_student[] = $row['student_student_id'];
+            }
+
+            foreach ($students as $key) {
+                $res[] = array(
+                    'student_id' => $key['student_id'],
+                    'student_name' => $key['student_name'],
+                    'ticked' => (in_array($key['partners_id'], $res_student)) ? true : false
+                );
+            }
+        }
+
+        $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($res));
     }
 
 }

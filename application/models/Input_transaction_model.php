@@ -84,12 +84,12 @@ class Input_transaction_model extends CI_Model {
             $this->db->set('transaction_is_late', $data['transaction_is_late']);
         }
         
-         if(isset($data['periode_periode_id'])) {
-            $this->db->set('periode_periode_id', $data['periode_periode_id']);
+         if(isset($data['periode_id'])) {
+            $this->db->set('periode_periode_id', $data['periode_id']);
         }
         
-         if(isset($data['student_student_id'])) {
-            $this->db->set('student_student_id', $data['student_student_id']);
+         if(isset($data['student_id'])) {
+            $this->db->set('student_student_id', $data['student_id']);
         }
         
          if(isset($data['transaction_input_date'])) {
