@@ -3,13 +3,13 @@
         <div class="row">
             <div class="col-md-8">
                 <h3>
-                    Detail Periode
+                    Detail Transaksi Pemasukan
                 </h3>
             </div>
             <div class="col-md-4">
                 <span class=" pull-right">
-                    <a href="<?php echo site_url('admin/periode') ?>" class="btn btn-info"><span class="fa fa-arrow-left"></span>&nbsp; Kembali</a> 
-                    <a href="<?php echo site_url('admin/periode/edit/' . $periode['periode_id']) ?>" class="btn btn-success"><span class="fa fa-edit"></span>&nbsp; Edit</a> 
+                    <a href="<?php echo site_url('admin/input_transaction') ?>" class="btn btn-info"><span class="fa fa-arrow-left"></span>&nbsp; Kembali</a> 
+                    <a href="<?php echo site_url('admin/input_transaction/edit/' . $input_transaction['input_transaction_id']) ?>" class="btn btn-success"><span class="fa fa-edit"></span>&nbsp; Edit</a> 
                 </span>
             </div>
         </div><br>
@@ -18,34 +18,29 @@
                 <table class="table table-striped">
                     <tbody>
                         <tr>
-                            <td>Tanggal</td>
+                            <td>Tanggal Periode</td>
                             <td>:</td>
-                            <td><?php echo pretty_date($periode['periode_date'], 'd F Y', FALSE) ?></td>
+                            <td><?php echo pretty_date($input_transaction['periode_date'], 'd F Y', FALSE) ?></td>
                         </tr>
                         <tr>
-                            <td>Total yang didapat</td>
+                            <td>Mahasiswa</td>
                             <td>:</td>
-                            <td><?php echo 'Rp ' . number_format($row['periode_total_budget'], 2, ',', '.') ?></td>
+                            <td><?php echo $row['student_name'] ?></td>
                         </tr>
                         <tr>
-                            <td>No. Telepon</td>
+                            <td>Tunggakan</td>
                             <td>:</td>
-                            <td><?php echo $periode['periode_phone'] ?></td>
+                            <td><?php echo ($row['transaction_is_late'] == TRUE)? 'Ya' : 'Tidak' ?></td>
                         </tr>
                         <tr>
-                            <td>Keterangan</td>
+                            <td>Tanggal diinput</td>
                             <td>:</td>
-                            <td><?php echo $periode['periode_description'] ?></td>
-                        </tr>
-                        <tr>
-                            <td>Tanggal dibuat</td>
-                            <td>:</td>
-                            <td><?php echo $periode['periode_last_update'] ?></td>
+                            <td><?php echo $input_transaction['input_transaction_input_date'] ?></td>
                         </tr>
                         <tr>
                             <td>Penulis</td>
                             <td>:</td>
-                            <td><?php echo $periode['user_name']; ?></td>
+                            <td><?php echo $input_transaction['user_name']; ?></td>
                         </tr>
                     </tbody>
                 </table>
