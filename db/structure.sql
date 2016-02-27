@@ -166,6 +166,7 @@ CREATE  TABLE IF NOT EXISTS `student` (
   `student_is_deleted` TINYINT(1) NULL ,
   `user_user_id` INT(11) NULL ,
   `student_input_date` TIMESTAMP NULL ,
+  `student_last_update` TIMESTAMP NULL ,
   PRIMARY KEY (`student_id`) ,
   INDEX `fk_student_user1_idx` (`user_user_id` ASC) ,
   CONSTRAINT `fk_student_user1`
