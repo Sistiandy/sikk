@@ -158,6 +158,8 @@ CREATE  TABLE IF NOT EXISTS `student` (
   `student_id` INT NOT NULL AUTO_INCREMENT ,
   `student_nip` VARCHAR(45) NULL ,
   `student_name` VARCHAR(255) NULL ,
+  `student_place_birth` VARCHAR(45) NULL ,
+  `student_birth_date` DATE NULL ,
   `student_password` VARCHAR(45) NULL ,
   `student_phone` VARCHAR(45) NULL ,
   `student_email` VARCHAR(45) NULL ,

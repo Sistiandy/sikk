@@ -57,8 +57,8 @@ class Student_model extends CI_Model {
             $this->db->order_by('student_last_update', 'desc');
         }
 
-        $this->db->select('student.student_id, student_name, student_nip, student_name, student_password,
-            student_phone, student_email, student_address, student_is_deleted,
+        $this->db->select('student.student_id, student_name, student_nip, student_name, student_place_birth, student_password,
+            student_birth_date, student_phone, student_email, student_address, student_is_deleted,
             student_input_date, student_last_update');
         $this->db->select('user_user_id, user_name');
         $this->db->join('user', 'user.user_id = student.user_user_id', 'left');
@@ -103,6 +103,14 @@ class Student_model extends CI_Model {
         
          if(isset($data['student_address'])) {
             $this->db->set('student_address', $data['student_address']);
+        }
+
+         if(isset($data['student_place_birth'])) {
+            $this->db->set('student_place_birth', $data['student_place_birth']);
+        }
+
+         if(isset($data['student_birth_date'])) {
+            $this->db->set('student_birth_date', $data['student_birth_date']);
         }
         
          if(isset($data['student_budget'])) {

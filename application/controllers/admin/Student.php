@@ -51,6 +51,8 @@ class Student extends CI_Controller {
         if (!$this->input->post('student_id')) {
             $this->form_validation->set_rules('student_nip', 'NIP', 'trim|required|xss_clean|is_unique[student.student_nip]');
             $this->form_validation->set_rules('student_name', 'Name', 'trim|required|xss_clean|is_unique[student.student_name]');
+            $this->form_validation->set_rules('student_password', 'Password', 'trim|required|min_length[6]|xss_clean');
+            $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required|min_length[6]|matches[student_password]');
         }
         $this->form_validation->set_rules('student_phone', 'Phone', 'trim|required|xss_clean');
         $this->form_validation->set_rules('student_email', 'Email', 'trim|required|xss_clean');
@@ -70,6 +72,9 @@ class Student extends CI_Controller {
             $params['student_last_update'] = date('Y-m-d H:i:s');
             $params['student_nip'] = $this->input->post('student_nip');
             $params['student_name'] = $this->input->post('student_name');
+            $params['student_password'] = sha1($this->input->post('student_password'));
+            $params['student_place_birth'] = $this->input->post('student_place_birth');
+            $params['student_birth_date'] = $this->input->post('student_birth_date');
             $params['student_phone'] = $this->input->post('student_phone');
             $params['student_email'] = $this->input->post('student_email');
             $params['student_address'] = $this->input->post('student_address');

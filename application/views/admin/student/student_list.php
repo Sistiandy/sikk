@@ -11,18 +11,21 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th class="controls" align="center">NO</th>
                         <th class="controls" align="center">NPM</th>
                         <th class="controls" align="center">NAMA</th>
                         <th class="controls" align="center">EMAIL</th>
                         <th class="controls" align="center">AKSI</th>
                     </tr>
                 </thead>
-                <?php
+                <?php 
+                $i=1;
                 if (!empty($student)) {
                     foreach ($student as $row) {
                         ?>
                         <tbody>
                             <tr>
+                                <td ><?php echo $i; ?></td>
                                 <td ><?php echo $row['student_nip']; ?></td>
                                 <td ><?php echo $row['student_name']; ?></td>
                                 <td ><?php echo $row['student_email']; ?></td>
@@ -32,7 +35,7 @@
                                 </td>
                             </tr>
                         </tbody>
-                        <?php
+                        <?php $i++;
                     }
                 } else {
                     ?>

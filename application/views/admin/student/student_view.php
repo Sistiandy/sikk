@@ -1,3 +1,10 @@
+<style type="text/css">
+   .upper { text-transform: uppercase; }
+   .lower { text-transform: lowercase; }
+   .cap   { text-transform: capitalize; }
+   .small { font-variant:   small-caps; }
+</style>
+
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
     <div class="x_panel post-inherit">
         <div class="row">
@@ -25,7 +32,12 @@
                         <tr>
                             <td>Nama</td>
                             <td>:</td>
-                            <td><?php echo $student['student_name'] ?></td>
+                            <td><span class="cap"><?php echo $student['student_name'] ?></span></td>
+                        </tr>
+                        <tr>
+                            <td>Tempat, Tanggal Lahir</td>
+                            <td>:</td>
+                            <td><span class="cap"><?php echo $student['student_place_birth'] . ', ' . pretty_date($student['student_birth_date'], 'd F Y', FALSE) ?></span></td>
                         </tr>
                         <tr>
                             <td>No. Telepon</td>
