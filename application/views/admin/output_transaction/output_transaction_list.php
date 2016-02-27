@@ -11,26 +11,31 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th class="controls" align="center">NO.</th>
+                        <th class="controls" align="center">TRANSAKSI</th>
                         <th class="controls" align="center">TANGGAL</th>
-                        <th class="controls" align="center">TOTAL</th>
+                        <th class="controls" align="center">RUPIAH</th>
                         <th class="controls" align="center">AKSI</th>
                     </tr>
                 </thead>
                 <?php
-                if (!empty($periode)) {
-                    foreach ($periode as $row) {
+                $i=1;
+                if (!empty($output)) {
+                    foreach ($output as $row) {
                         ?>
                         <tbody>
                             <tr>
-                                <td ><?php echo pretty_date($row['periode_date'], 'd F Y', FALSE); ?></td>
-                                <td ><?php echo 'Rp ' . number_format($row['periode_total_budget'], 2, ',', '.'); ?></td>
+                                <td ><?php echo $i ?></td>
+                                <td ><?php echo $row['transaction_title']; ?></td>
+                                <td ><?php echo pretty_date($row['transaction_date'], 'd F Y', FALSE); ?></td>                                
+                                <td ><?php echo 'Rp ' . number_format($row['transaction_budget'], 2, ',', '.'); ?></td>
                                 <td>
-                                    <a class="btn btn-warning btn-xs" href="<?php echo site_url('admin/periode/detail/' . $row['periode_id']); ?>" ><span class="glyphicon glyphicon-eye-open"></span></a>
-                                    <a class="btn btn-success btn-xs" href="<?php echo site_url('admin/periode/edit/' . $row['periode_id']); ?>" ><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a class="btn btn-warning btn-xs" href="<?php echo site_url('admin/output_transaction/detail/' . $row['output_transaction_id']); ?>" ><span class="glyphicon glyphicon-eye-open"></span></a>
+                                    <a class="btn btn-success btn-xs" href="<?php echo site_url('admin/output_transaction/edit/' . $row['output_transaction_id']); ?>" ><span class="glyphicon glyphicon-edit"></span></a>
                                 </td>
                             </tr>
                         </tbody>
-                        <?php
+                        <?php $i++;
                     }
                 } else {
                     ?>
@@ -38,7 +43,7 @@
                         <tr id="row">
                             <td colspan="3" align="center">Data Kosong</td>
                         </tr>
-                    </tbody>
+                    </tbody> 
                     <?php
                 }
                 ?>   

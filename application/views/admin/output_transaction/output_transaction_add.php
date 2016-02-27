@@ -1,39 +1,50 @@
 <?php
 $this->load->view('admin/datepicker');
-
-if (isset($periode)) {
-    $inputDate = $periode['periode_date'];
-    $inputDescription = $periode['periode_description'];
-} else {
-    $inputDate = set_value('periode_date');
-    $inputDescription = set_value('periode_description');
+ 
+if (isset($output)) {
+    $inputTitle = $output['transaction_title'];
+    $inputDate = $output['transaction_date'];
+    $inputDesc = $output['transaction_description'];
+    $inputBudget = $output['transaction_budget'];
+    $inputTitle = $output['transaction_title'];    
+} else {   
+    $inputTitle = set_value('transaction_title');
+    $inputDate = set_value('transaction_date');
+    $inputDesc = set_value('transaction_description');
+    $inputBudget = set_value('transaction_budget');
+    
 }
 ?>
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
     <div class="x_panel post-inherit">
-        <?php if (!isset($periode)) echo validation_errors(); ?>
+        <?php if (!isset($output)) echo validation_errors(); ?>
         <?php echo form_open_multipart(current_url()); ?>
         <div>
-            <h3><?php echo $operation; ?> Periode</h3><br>
+            <h3><?php echo $operation; ?> Transaksi Keluar</h3><br>
         </div>
 
         <div class="row">
             <div class="col-sm-9 col-md-9">
-                <?php if (isset($periode)): ?>
-                    <input type="hidden" name="periode_id" value="<?php echo $periode['periode_id']; ?>" />
+                <?php if (isset($output)): ?>
+                    <input type="hidden" name="output_transaction_id" value="<?php echo $output['output_transaction_id']; ?>" />
                 <?php endif; ?>
-                <label >Tanggal *</label>
-                <input name="periode_date" placeholder="Tanggal" type="text" class="datepicker form-control" value="<?php echo $inputDate; ?>"><br>
-                <label >Keterangan </label>
-                <textarea name="periode_description" placeholder="Description" type="text" class="form-control"><?php echo $inputDescription; ?></textarea><br>
+                <label >Nama Transaksi *</label>
+                <input name="transaction_title" placeholder="Nama Transaksi" type="text" class="form-control" value="<?php echo $inputTitle; ?>"><br>
+                <label >Tanggal Transaksi *</label>
+                <input name="transaction_date" placeholder="Tanggal" type="text" class="form-control datepicker" value="<?php echo $inputDate; ?>"><br>                
+                <label >Jumlah Rupiah *</label>
+                <input name="transaction_budget" placeholder="Masukan Rupiah" type="text" class="form-control" value="<?php echo $inputBudget; ?>"><br>
+                <label >Keterangan Transaksi *</label>
+                <textarea name="transaction_description" placeholder="Keterangan" type="text" class="form-control" value="<?php echo $inputDesc; ?>"></textarea><br>
+
                 <p style="color:#9C9C9C;margin-top: 5px"><i>*) Field Wajib Diisi</i></p>
             </div>
             <div class="col-sm-9 col-md-3">
                 <div class="form-group">
                     <button name="action" type="submit" value="save" class="btn btn-success btn-form"><i class="fa fa-check"></i> Simpan</button>
-                    <a href="<?php echo site_url('admin/periode'); ?>" class="btn btn-info btn-form"><i class="fa fa-arrow-left"></i> Batal</a>
-                    <?php if (isset($periode)): ?>
-                        <a href="<?php echo site_url('admin/periode/delete/' . $periode['periode_id']); ?>" class="btn btn-danger btn-form" ><i class="fa fa-trash"></i> Hapus</a>
+                    <a href="<?php echo site_url('admin/output_transaction'); ?>" class="btn btn-info btn-form"><i class="fa fa-arrow-left"></i> Batal</a>
+                    <?php if (isset($output)): ?>
+                        <a href="<?php echo site_url('admin/output_transaction/delete/' . $output['output_transaction_id']); ?>" class="btn btn-danger btn-form" ><i class="fa fa-trash"></i> Hapus</a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -42,7 +53,7 @@ if (isset($periode)) {
     </div>
 </div>
 
-<?php if (isset($periode)): ?>
+<?php if (isset($output)): ?>
     <!-- Delete Confirmation -->
     <div class="modal fade" id="confirm-del">
         <div class="modal-dialog">
@@ -54,11 +65,11 @@ if (isset($periode)) {
                 <div class="modal-body">
                     <p>Data yang dipilih akan dihapus oleh sistem, apakah anda yakin?;</p>
                 </div>
-                <?php echo form_open('admin/periode/delete/' . $periode['periode_id']); ?>
+                <?php echo form_open('admin/output_transaction/delete/' . $output['output_id']); ?>
                 <div class="modal-footer">
                     <a><button style="float: right;margin-left: 10px" type="button" class="btn btn-default" data-dismiss="modal">Tidak</button></a>
-                    <input type="hidden" name="del_id" value="<?php echo $periode['periode_id'] ?>" />
-                    <input type="hidden" name="del_name" value="<?php echo $periode['periode_date'] ?>" />
+                    <input type="hidden" name="del_id" value="<?php echo $output['output_transaction_id'] ?>" />
+                    <input type="hidden" name="del_name" value="<?php echo $output['transaction_title'] ?>" />
                     <button type="submit" class="btn btn-danger"> Ya</button>
                 </div>
                 <?php echo form_close(); ?>

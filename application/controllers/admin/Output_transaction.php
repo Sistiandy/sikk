@@ -25,12 +25,12 @@ class Output_transaction extends CI_Controller {
     // Input_transaction view in list
     public function index($offset = NULL) {
         $this->load->library('pagination');
-        $data['output_transaction'] = $this->Output_transaction_model->get(array('limit' => 10, 'offset' => $offset, 'status' => TRUE));
+        $data['output'] = $this->Output_transaction_model->get(array('limit' => 10, 'offset' => $offset, 'status' => TRUE));
         $config['base_url'] = site_url('admin/output_transaction/index');
         $config['total_rows'] = count($this->Output_transaction_model->get(array('status' => TRUE)));
         $this->pagination->initialize($config);
 
-        $data['title'] = 'Output_transaction';
+        $data['title'] = 'output_transaction';
         $data['main'] = 'admin/output_transaction/output_transaction_list';
         $this->load->view('admin/layout', $data);
     }
@@ -39,7 +39,7 @@ class Output_transaction extends CI_Controller {
         if ($this->Output_transaction_model->get(array('id' => $id)) == NULL) {
             redirect('admin/output_transaction');
         }
-        $data['output_transaction'] = $this->Output_transaction_model->get(array('id' => $id));
+        $data['output'] = $this->Output_transaction_model->get(array('id' => $id));
         $data['title'] = 'Detail Output_transaction';
         $data['main'] = 'admin/output_transaction/output_transaction_view';
         $this->load->view('admin/layout', $data);
@@ -48,7 +48,7 @@ class Output_transaction extends CI_Controller {
     // Add Output_transaction and Update
     public function add($id = NULL) {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('periode_id', 'Periode', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('transaction_title', 'Transaksi', 'trim|required|xss_clean');
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>', '</div>');
         $data['operation'] = is_null($id) ? 'Tambah' : 'Sunting';
 

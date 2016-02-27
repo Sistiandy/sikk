@@ -3,7 +3,7 @@
 /** 
 * Output_transaction_model Model Class
  *
- * @package     SYSCMS
+ * @package     SYSCMS 
  * @subpackage  Models
  * @category    Models
  * @author      Sistiandy Syahbana nugraha <sistiandy.web.id>
@@ -85,6 +85,10 @@ class Output_transaction_model extends CI_Model {
 
     if(isset($data['transaction_budget'])) {
         $this->db->set('transaction_budget', $data['transaction_budget']);
+    }
+
+    if(isset($data['transaction_description'])) {
+        $this->db->set('transaction_description', $data['transaction_description']);
     }
 
     if(isset($data['transaction_input_date'])) {
