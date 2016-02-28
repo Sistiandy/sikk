@@ -56,7 +56,7 @@
                             ?>
                             <h1>Administrator</h1>                            
                             <div class="row">
-                                <div class="center-block"> <img width=270 height=200 src="<?php echo media_url() ?>/images/unindra.png" alt="">
+                            <div class="center-block"> <img width=270 height=250 src="<?php echo media_url() ?>/images/unindra.png" alt="">
                                 </div>
                                 <hr>
                                 <div>

@@ -5789,7 +5789,7 @@ form:after {
     position: relative;
     text-align: center;
     text-shadow: 0 1px 0 #fff;
-    min-width: 280px;
+    
 }
 .login_content h1 {
     font: normal 25px Helvetica, Arial, sans-serif;
