@@ -66,7 +66,7 @@
                                     <input type="password" class="form-control" placeholder="Password" name="password" required="" />
                                 </div>
                                 <div>
-                                    <button class="btn btn-success btn-block" type="submit" >Login</button>
+                                    <button class="sun-flower-button" type="submit" >Login</button>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="separator">
