@@ -77,6 +77,10 @@ class Periode_model extends CI_Model {
          if(isset($data['periode_total_budget'])) {
             $this->db->set('periode_total_budget', $data['periode_total_budget']);
         }
+
+        if (isset($data['increase_budget'])) {
+            $this->db->set('periode_total_budget', 'periode_total_budget +' . $data['increase_budget'], FALSE);
+        }
         
          if(isset($data['periode_description'])) {
             $this->db->set('periode_description', $data['periode_description']);
