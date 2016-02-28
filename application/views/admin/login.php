@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!-- Meta, title, CSS, favicons, etc. -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>SYSCMS | LOGIN</title>
-        <link rel="icon" href="<?php echo media_url('ico/favicon.jpg'); ?>" type="image/x-icon">
+    <title>SYSCMS | LOGIN</title>
+    <link rel="icon" href="<?php echo media_url('ico/favicon.jpg'); ?>" type="image/x-icon">
 
-        <!-- Bootstrap core CSS -->
+    <!-- Bootstrap core CSS -->
 
-        <link href="<?php echo media_url() ?>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo media_url() ?>/css/bootstrap.min.css" rel="stylesheet">
 
-        <link href="<?php echo media_url() ?>/fonts/css/font-awesome.min.css" rel="stylesheet">
-        <link href="<?php echo media_url() ?>/css/animate.min.css" rel="stylesheet">
+    <link href="<?php echo media_url() ?>/fonts/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo media_url() ?>/css/animate.min.css" rel="stylesheet">
 
-        <!-- Custom styling plus plugins -->
-        <link href="<?php echo media_url() ?>/css/custom.css" rel="stylesheet">
+    <!-- Custom styling plus plugins -->
+    <link href="<?php echo media_url() ?>/css/custom.css" rel="stylesheet">
 
-        <script src="<?php echo media_url() ?>/js/jquery.min.js"></script>
+    <script src="<?php echo media_url() ?>/js/jquery.min.js"></script>
 
         <!--[if lt IE 9]>
             <script src="../assets/js/ie8-responsive-file-warning.js"></script>
             <![endif]-->
 
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+            <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
               <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
               <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-            <![endif]-->
+              <![endif]-->
 
-    </head>
+          </head>
 
+          <body role="login"><br><br><br>
 
-    <body style="background:#F7F7F7;">
+            <div class="col-md-8 col-lg-3 col-sm-12 col-xs-12 center-margin">
 
-        <div class="">
+                <div class="panel panel-default">
 
-            <div id="wrapper">
-                <div id="login" class="animate form">
+                  <div class="panel-body">
                     <section class="login_content">
                         <form role="form" action="<?php echo site_url('admin/auth/login') ?>" method="post">
                             <?php
@@ -54,33 +54,37 @@
                                 echo '" />';
                             }
                             ?>
-                            <h1>Admin Login</h1>
-                            <div>
-                                <input autofocus type="text" class="form-control" placeholder="Username" name="username" required="" />
-                            </div>
-                            <div>
-                                <input type="password" class="form-control" placeholder="Password" name="password" required="" />
-                            </div>
-                            <div>
-                                <button class="btn btn-default submit" type="submit" >Log in</button>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="separator">
-
-                                <div class="clearfix"></div>
-                                <br />
-                                <div>
-                                    <p>©2015 All Rights Reserved. Syscms. Privacy and Terms</p>
+                            <h1>Administrator</h1>                            
+                            <div class="row">
+                                <div class="center-block"> <img width=270 height=200 src="<?php echo media_url() ?>/images/unindra.png" alt="">
                                 </div>
-                            </div>
-                        </form>
-                        <!-- form -->
-                    </section>
-                    <!-- content -->
+                                <hr>
+                                <div>
+                                    <input autofocus type="text" class="form-control" placeholder="Username" name="username" required="" />
+                                </div>
+                                <div>
+                                    <input type="password" class="form-control" placeholder="Password" name="password" required="" />
+                                </div>
+                                <div>
+                                    <button class="btn btn-success btn-block" type="submit" >Login</button>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="separator">
+
+                                    <div class="clearfix"></div>
+                                    <br />
+                                    <div>
+                                        <p>© <?php echo pretty_date(date('Y-m-d'), 'Y',FALSE) ?> All Rights Reserved Privacy and Terms</p>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- form -->
+                        </section>
+                        <!-- content -->
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </body>
+        </body>
 
-</html>
+        </html>
