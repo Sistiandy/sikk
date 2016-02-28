@@ -37,7 +37,7 @@
 
           <body role="login"><br><br><br>
 
-            <div class="col-md-8 col-lg-3 col-sm-12 col-xs-12 center-margin">
+            <div class="col-md-12 col-lg-3 col-sm-12 col-xs-12 center-margin">
 
                 <div class="panel panel-default">
 

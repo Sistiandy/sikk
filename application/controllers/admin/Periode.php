@@ -18,7 +18,7 @@ class Periode extends CI_Controller {
         if ($this->session->userdata('logged') == NULL) {
             header("Location:" . site_url('admin/auth/login') . "?location=" . urlencode($_SERVER['REQUEST_URI']));
         }
-        $this->load->model(array('Periode_model', 'Activity_log_model'));
+        $this->load->model(array('Periode_model', 'Input_transaction_model','Activity_log_model'));
         $this->load->library('upload');
     }
 
@@ -40,6 +40,7 @@ class Periode extends CI_Controller {
             redirect('admin/periode');
         }
         $data['periode'] = $this->Periode_model->get(array('id' => $id));
+        $data['transaction'] = $this->Input_transaction_model->get(array('periode_id' => $id));
         $data['title'] = 'Detail Periode';
         $data['main'] = 'admin/periode/periode_view';
         $this->load->view('admin/layout', $data);

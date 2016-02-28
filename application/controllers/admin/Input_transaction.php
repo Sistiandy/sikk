@@ -74,6 +74,7 @@ class Input_transaction extends CI_Controller {
                 $status = $this->Input_transaction_model->add($params);
                 if (!$this->input->post('transaction_id')) {
                     $this->Student_model->add($params);
+                    $this->Periode_model->add($params);
                 }
 
 
