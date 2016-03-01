@@ -64,7 +64,7 @@ if (isset($output)) {
                 <div class="modal-body">
                     <p>Data yang dipilih akan dihapus oleh sistem, apakah anda yakin?;</p>
                 </div>
-                <?php echo form_open('admin/output_transaction/delete/' . $output['output_id']); ?>
+                <?php echo form_open('admin/output_transaction/delete/' . $output['output_transaction_id']); ?>
                 <div class="modal-footer">
                     <a><button style="float: right;margin-left: 10px" type="button" class="btn btn-default" data-dismiss="modal">Tidak</button></a>
                     <input type="hidden" name="del_id" value="<?php echo $output['output_transaction_id'] ?>" />
