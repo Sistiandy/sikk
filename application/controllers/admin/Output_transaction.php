@@ -83,13 +83,13 @@ class Output_transaction extends CI_Controller {
             $this->session->set_flashdata('success', $data['operation'] . ' Transaksi Kas berhasil');
             redirect('admin/output_transaction');
         } else {
-            if ($this->input->post('transaction_id')) {
-                redirect('admin/output_transaction/edit/' . $this->input->post('transaction_id'));
+            if ($this->input->post('output_transaction_id')) {
+                redirect('admin/output_transaction/edit/' . $this->input->post('output_transaction_id'));
             }
 
             // Edit mode
             if (!is_null($id)) {
-                $data['output_transaction'] = $this->Output_transaction_model->get(array('id' => $id));
+                $data['output'] = $this->Output_transaction_model->get(array('id' => $id));
             }
             $data['title'] = $data['operation'] . ' Transaksi Kas';
             $data['main'] = 'admin/output_transaction/output_transaction_add';

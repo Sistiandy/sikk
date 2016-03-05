@@ -1,12 +1,11 @@
 <?php
 $this->load->view('admin/datepicker');
- 
+
 if (isset($output)) {
     $inputTitle = $output['transaction_title'];
     $inputDate = $output['transaction_date'];
     $inputDesc = $output['transaction_description'];
-    $inputBudget = $output['transaction_budget'];
-    $inputTitle = $output['transaction_title'];    
+    $inputBudget = $output['transaction_budget'];       
 } else {   
     $inputTitle = set_value('transaction_title');
     $inputDate = set_value('transaction_date');
@@ -65,7 +64,7 @@ if (isset($output)) {
                 <div class="modal-body">
                     <p>Data yang dipilih akan dihapus oleh sistem, apakah anda yakin?;</p>
                 </div>
-                <?php echo form_open('admin/output_transaction/delete/' . $output['output_id']); ?>
+                <?php echo form_open('admin/output_transaction/delete/' . $output['output_transaction_id']); ?>
                 <div class="modal-footer">
                     <a><button style="float: right;margin-left: 10px" type="button" class="btn btn-default" data-dismiss="modal">Tidak</button></a>
                     <input type="hidden" name="del_id" value="<?php echo $output['output_transaction_id'] ?>" />
@@ -77,11 +76,11 @@ if (isset($output)) {
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <?php if ($this->session->flashdata('delete')) { ?>
-        <script type="text/javascript">
-            $(window).load(function() {
-                $('#confirm-del').modal('show');
-            });
-        </script>
+    <script type="text/javascript">
+        $(window).load(function() {
+            $('#confirm-del').modal('show');
+        });
+    </script>
     <?php }
     ?>
 <?php endif; ?>

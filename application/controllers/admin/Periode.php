@@ -18,7 +18,7 @@ class Periode extends CI_Controller {
         if ($this->session->userdata('logged') == NULL) {
             header("Location:" . site_url('admin/auth/login') . "?location=" . urlencode($_SERVER['REQUEST_URI']));
         }
-        $this->load->model(array('Periode_model', 'Input_transaction_model','Activity_log_model'));
+        $this->load->model(array('Periode_model', 'Input_transaction_model', 'Student_model', 'Activity_log_model'));
         $this->load->library('upload');
     }
 
@@ -39,6 +39,8 @@ class Periode extends CI_Controller {
         if ($this->Periode_model->get(array('id' => $id)) == NULL) {
             redirect('admin/periode');
         }
+        $data['ngapp'] = 'ng-app="inputApp"';        
+        $data['student'] = $this->Student_model->get();
         $data['periode'] = $this->Periode_model->get(array('id' => $id));
         $data['transaction'] = $this->Input_transaction_model->get(array('periode_id' => $id));
         $data['title'] = 'Detail Periode';
@@ -70,14 +72,14 @@ class Periode extends CI_Controller {
 
             // activity log
             $this->Activity_log_model->add(
-                    array(
-                        'log_date' => date('Y-m-d H:i:s'),
-                        'user_id' => $this->session->userdata('user_id'),
-                        'log_module' => 'Periode',
-                        'log_action' => $data['operation'],
-                        'log_info' => 'ID:null;Date:' . $params['periode_date']
+                array(
+                    'log_date' => date('Y-m-d H:i:s'),
+                    'user_id' => $this->session->userdata('user_id'),
+                    'log_module' => 'Periode',
+                    'log_action' => $data['operation'],
+                    'log_info' => 'ID:null;Date:' . $params['periode_date']
                     )
-            );
+                );
 
             $this->session->set_flashdata('success', $data['operation'] . ' Periode berhasil');
             redirect('admin/periode');
@@ -102,19 +104,81 @@ class Periode extends CI_Controller {
             $this->Periode_model->delete($this->input->post('del_id'));
             // activity log
             $this->Activity_log_model->add(
-                    array(
-                        'log_date' => date('Y-m-d H:i:s'),
-                        'user_id' => $this->session->userdata('user_id'),
-                        'log_module' => 'Periode',
-                        'log_action' => 'Hapus',
-                        'log_info' => 'ID:' . $this->input->post('del_id') . ';Date:' . $this->input->post('del_name')
+                array(
+                    'log_date' => date('Y-m-d H:i:s'),
+                    'user_id' => $this->session->userdata('user_id'),
+                    'log_module' => 'Periode',
+                    'log_action' => 'Hapus',
+                    'log_info' => 'ID:' . $this->input->post('del_id') . ';Date:' . $this->input->post('del_name')
                     )
-            );
+                );
             $this->session->set_flashdata('success', 'Hapus Periode berhasil');
             redirect('admin/periode');
         } elseif (!$_POST) {
             $this->session->set_flashdata('delete', 'Delete');
             redirect('admin/periode/edit/' . $id);
+        }
+    }
+
+    public function addtransaction($id = NULL) {
+        $this->load->model('Setting_model');
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('from_list', 'Mahasiswa', 'trim|required|xss_clean');
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>', '</div>');
+        $data['operation'] = is_null($id) ? 'Tambah' : 'Sunting';
+
+        if ($_POST AND $this->form_validation->run() == TRUE) {
+
+            if ($this->input->post('transaction_id')) {
+                $params['transaction_id'] = $this->input->post('transaction_id');
+            } else {
+                $params['transaction_input_date'] = date('Y-m-d H:i:s');
+            }
+            $cash = $this->Setting_model->get(array('id' => CLASS_CASH));
+            $student = $_POST['student_id'];
+            $cpt = count($_POST['student_id']);
+            for ($i = 0; $i < $cpt; $i++) {
+                $params['increase_budget'] = $cash['setting_value'];
+                $params['user_id'] = $this->session->userdata('user_id');
+                $params['transaction_last_update'] = date('Y-m-d H:i:s');
+                $params['transaction_date'] = $this->input->post('transaction_date');
+                $params['transaction_description'] = $this->input->post('transaction_description');
+                $params['periode_id'] = $id;
+                $params['student_id'] = $student[$i];
+                $status = $this->Input_transaction_model->add($params);
+                if (!$this->input->post('transaction_id')) {
+                    $this->Student_model->add($params);
+                    $this->Periode_model->add($params);
+                }
+
+
+                // activity log
+                $this->Activity_log_model->add(
+                    array(
+                        'log_date' => date('Y-m-d H:i:s'),
+                        'user_id' => $this->session->userdata('user_id'),
+                        'log_module' => 'Input_transaction',
+                        'log_action' => $data['operation'],
+                        'log_info' => 'ID:null;Date:' . $params['transaction_date']
+                        )
+                    );
+            }
+
+            $this->session->set_flashdata('success', $data['operation'] . ' Transaksi Kas berhasil');
+            redirect('admin/periode/detail/'. $id);
+        } else {
+            
+
+            // Edit mode
+            if (!is_null($id)) {
+                $data['input_transaction'] = $this->Input_transaction_model->get(array('id' => $id));
+            }
+            $data['ngapp'] = 'ng-app="inputApp"';
+            $data['periode'] = $this->Periode_model->get();
+            $data['student'] = $this->Student_model->get();
+            $data['title'] = $data['operation'] . ' Transaksi Kas';
+            $data['main'] = 'admin/input_transaction/input_transaction_add';
+            $this->load->view('admin/layout', $data);
         }
     }
 

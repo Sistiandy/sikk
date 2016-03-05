@@ -9,7 +9,7 @@ if (isset($input_transaction)) {
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
     <div class="x_panel post-inherit">
         <?php if (!isset($input_transaction)) echo validation_errors(); ?>
-        <?php echo form_open(current_url()); ?>
+        <?php echo form_open_multipart(current_url()); ?>
         <div>
             <h3><?php echo $operation; ?> Input Transaksi</h3><br>
         </div>

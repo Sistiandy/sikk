@@ -18,9 +18,9 @@ class Output_transaction_model extends CI_Model {
     // Get From Databases
     function get($params = array())
     {
-        if(isset($params['id']))
+        if(isset($params['output_transaction_id']))
         {
-            $this->db->where('output_transaction_id', $params['id']);
+            $this->db->where('output_transaction_id', $params['output_transaction_id']);
         }
         
         if(isset($params['transaction_title']))
@@ -103,7 +103,7 @@ class Output_transaction_model extends CI_Model {
         $this->db->set('user_user_id', $data['user_id']);
     }
 
-    if (isset($data['output_transaction'])) {
+    if (isset($data['output_transaction_id'])) {
         $this->db->where('output_transaction_id', $data['output_transaction_id']);
         $this->db->update('output_transaction');
         $id = $data['output_transaction_id'];
@@ -120,6 +120,6 @@ class Output_transaction_model extends CI_Model {
 function delete($id) {
     $this->db->where('output_transaction_id', $id);
     $this->db->update('output_transaction');
-}
+    }
 
 }
