@@ -34,7 +34,9 @@ if (isset($output)) {
                 <label >Jumlah Rupiah *</label>
                 <input name="transaction_budget" placeholder="Masukan Rupiah" type="text" class="form-control" value="<?php echo $inputBudget; ?>"><br>
                 <label >Keterangan Transaksi *</label>
-                <textarea name="transaction_description" placeholder="Keterangan" type="text" class="form-control" value="<?php echo $inputDesc; ?>"></textarea><br>
+                <textarea name="transaction_description" placeholder="Keterangan" type="text" class="form-control">
+                <?php echo $inputDesc; ?>
+                </textarea><br>
 
                 <p style="color:#9C9C9C;margin-top: 5px"><i>*) Field Wajib Diisi</i></p>
             </div>

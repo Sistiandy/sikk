@@ -119,7 +119,7 @@ class Output_transaction_model extends CI_Model {
     // Delete to database
 function delete($id) {
     $this->db->where('output_transaction_id', $id);
-    $this->db->update('output_transaction');
+    $this->db->delete('output_transaction');
     }
 
 }

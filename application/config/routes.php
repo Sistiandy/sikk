@@ -51,6 +51,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   |		my-controller/my-method	-> my_controller/my_method
  */
 
+$route['student/(:any)/(:any)/edit/(:num)'] = "student/$1/add_$2/$3";
+$route['student/(:any)/(:any)/add'] = "student/$1/add_$2";
+$route['student/(:any)/edit/(:num)'] = "student/$1/add/$2";
+$route['student'] = "student/dashboard";
+
 $route['admin/(:any)/(:any)/edit/(:num)'] = "admin/$1/add_$2/$3";
 $route['admin/(:any)/(:any)/add'] = "admin/$1/add_$2";
 $route['admin/(:any)/edit/(:num)'] = "admin/$1/add/$2";

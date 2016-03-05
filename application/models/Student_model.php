@@ -27,6 +27,11 @@ class Student_model extends CI_Model {
         {
             $this->db->where('student_nip', $params['nip']);
         }
+
+        if(isset($params['password']))
+        {
+            $this->db->where('student_password', $params['password']);
+        }
         
         if(isset($params['student_name']))
         {
