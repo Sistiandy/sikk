@@ -58,7 +58,7 @@ class Student_model extends CI_Model {
         }
 
         $this->db->select('student.student_id, student_name, student_nip, student_name, student_place_birth, student_password,
-            student_birth_date, student_phone, student_email, student_address, student_is_deleted,
+            student_birth_date, student_phone, student_email, student_address, student_is_deleted, student_budget,
             student_input_date, student_last_update');
         $this->db->select('user_user_id, user_name');
         $this->db->join('user', 'user.user_id = student.user_user_id', 'left');

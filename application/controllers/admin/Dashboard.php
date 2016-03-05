@@ -22,6 +22,14 @@ class Dashboard extends CI_Controller {
     // Dashboard View
     public function index()
     {
+        $this->load->model('Student_model');
+        $this->load->model('Input_transaction_model');
+        $this->load->model('Output_transaction_model');
+        $this->load->model('Periode_model');
+        $data['student'] = count($this->Student_model->get(array('deleted' => FALSE)));
+        $data['input'] = count($this->Input_transaction_model->get());
+        $data['output'] = count($this->Output_transaction_model->get());
+        $data['periode'] = count($this->Periode_model->get());
         $data['title'] = 'Dashboard';
         $data['main'] = 'admin/dashboard/dashboard';
         $this->load->view('admin/layout', $data);

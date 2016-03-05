@@ -17,7 +17,7 @@
                 </ul>
             </li>
 
-            <li><a><i class="fa fa-users"></i> Transaksi <span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-money"></i> Transaksi <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo site_url('admin/input_transaction') ?>">Input Transaksi</a>
                     <li><a href="<?php echo site_url('admin/output_transaction') ?>">Output Transaksi</a>
@@ -25,7 +25,7 @@
                 </ul>
             </li>
 
-            <li><a><i class="fa fa-users"></i> Periode Kas <span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-calendar"></i> Periode Kas <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo site_url('admin/periode') ?>">Daftar Periode</a>
                     </li>
