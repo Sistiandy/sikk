@@ -48,42 +48,39 @@ class Profile extends CI_Controller {
 
         if ($_POST AND $this->form_validation->run() == TRUE) {
 
-            $nip = $this->input->post('student_nip');
-            $params['student_id'] = $this->input->post('student_id');
-            $params['student_last_update'] = date('Y-m-d H:i:s');
-            $params['student_full_name'] = stripslashes($this->input->post('student_full_name'));
-            $params['student_sex'] = $this->input->post('student_sex');
-            $params['student_birth_place'] = $this->input->post('student_birth_place');
-            $params['student_birth_date'] = $this->input->post('student_birth_date');
-            $params['student_school'] = $this->input->post('student_school');
-            $params['student_phone'] = $this->input->post('student_phone');
-            $params['student_address'] = $this->input->post('student_address');
-            $params['student_mentor'] = $this->input->post('student_mentor');
-            $params['student_entry_date'] = $this->input->post('student_entry_date');
-            $params['student_division'] = $this->input->post('student_division');
-            $status = $this->Student_model->add($params);
-
-            if (!empty($_FILES['student_image']['name'])) {
-                if ($this->input->post('student_id')) {
-                    $createdate = $this->input->post('student_input_date');
-                } else {
-                    $createdate = date('Y-m-d H:i');
-                }
-                $paramsupdate['student_image'] = $this->do_upload($name = 'student_image', $createdate, $nip);
+            if ($this->input->post('student_id')) {
+                $params['student_id'] = $this->input->post('student_id');
+            } else {
+                $params['student_input_date'] = date('Y-m-d H:i:s');
             }
-            $paramsupdate['student_id'] = $status;
-            $this->Student_model->add($paramsupdate);
 
-            $this->session->set_flashdata('success', $data['operation'] . ' Profil Berhasil');
-            redirect('student/profile');
+            $params['user_id'] = $this->session->userdata('user_id');
+            $params['student_last_update'] = date('Y-m-d H:i:s');
+            $params['student_nip'] = $this->input->post('student_nip');
+            $params['student_name'] = $this->input->post('student_name');
+            $params['student_password'] = sha1($this->input->post('student_password'));
+            $params['student_place_birth'] = $this->input->post('student_place_birth');
+            $params['student_birth_date'] = $this->input->post('student_birth_date');
+            $params['student_phone'] = $this->input->post('student_phone');
+            $params['student_email'] = $this->input->post('student_email');
+            $params['student_address'] = $this->input->post('student_address');
+            $status = $this->Student_model->add($params);
+           
+
+            $this->session->set_flashdata('success', $data['operation'] . ' Pelajar berhasil');
+            redirect('admin/student');
         } else {
+            if ($this->input->post('student_id')) {
+                redirect('admin/student/edit/' . $this->input->post('student_id'));
+            }
 
             // Edit mode
-            $data['student'] = $this->Student_model->get(array('id' => $this->session->userdata('student_id')));
-            $data['button'] = 'Ubah';
-            $data['title'] = $data['operation'] . ' Profil';
-            $data['main'] = 'student/profile/profile_edit';
-            $this->load->view('student/layout', $data);
+            if (!is_null($id)) {
+                $data['student'] = $this->Student_model->get(array('id' => $id));
+            }
+            $data['title'] = $data['operation'] . ' Pelajar';
+            $data['main'] = 'admin/student/student_add';
+            $this->load->view('admin/layout', $data);
         }
     }
 

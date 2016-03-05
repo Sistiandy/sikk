@@ -8,29 +8,21 @@
                 </span>
             </h3><br>
         </div>
-        <div class="col-md-12">
+       
+        <div class="col-md-10">
             <table class="table table-striped">
                 <tbody>
+                   <tr>
+                        <td>NPM</td>
+                        <td>:</td>
+                        <td><?php echo $student['student_nip'] ?></td>
+                    </tr>                   
                     <tr>
-                        <td>Nama</td>
+                        <td>Nama Lengkap</td>
                         <td>:</td>
                         <td><?php echo $student['student_name'] ?></td>
                     </tr>
-                    <tr>
-                        <td>Npm</td>
-                        <td>:</td>
-                        <td><?php echo $student['student_nip'] ?></td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>:</td>
-                        <td><?php echo $student['student_email'] ?></td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal Daftar</td>
-                        <td>:</td>
-                        <td><?php echo pretty_date($student['student_input_date'], 'l, d m Y', FALSE) ?></td>
-                    </tr>
+                   
                 </tbody>
             </table>
         </div>
