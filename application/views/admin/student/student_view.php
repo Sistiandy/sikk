@@ -40,6 +40,11 @@
                             <td><span class="cap"><?php echo $student['student_place_birth'] . ', ' . pretty_date($student['student_birth_date'], 'd F Y', FALSE) ?></span></td>
                         </tr>
                         <tr>
+                            <td>Pemasukan Uang Kas</td>
+                            <td>:</td>
+                            <td><?php echo 'Rp '.number_format($student['student_budget'],2,',','.'); ?></td>
+                        </tr>
+                        <tr>
                             <td>No. Telepon</td>
                             <td>:</td>
                             <td><?php echo $student['student_phone'] ?></td>
