@@ -6473,3 +6473,11 @@ hr {
     background: transparent  repeat scroll 0% 0%;
 }
 
+/*Widget dashboaed*/
+widget-dash{
+    height:30px;
+}
+wid-blue{
+    background-color: #59ABE3;
+}
+
