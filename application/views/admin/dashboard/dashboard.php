@@ -24,7 +24,7 @@
                   <p>Pemasukkan</p>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-cloud-upload"></i>
+                  <i class="fa fa-cloud-download"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -37,7 +37,7 @@
                   <p>Pengeluaran</p>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-cloud-download"></i>
+                  <i class="fa fa-cloud-upload"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>

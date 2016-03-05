@@ -165,7 +165,7 @@ CREATE  TABLE IF NOT EXISTS `student` (
   `student_email` VARCHAR(45) NULL ,
   `student_address` TEXT NULL ,
   `student_budget` DECIMAL(13) NULL DEFAULT 0 ,
-  `student_is_deleted` TINYINT(1) NULL ,
+  `student_is_deleted` TINYINT(1) NULL DEFAULT 0 ,
   `user_user_id` INT(11) NULL ,
   `student_input_date` TIMESTAMP NULL ,
   `student_last_update` TIMESTAMP NULL ,
