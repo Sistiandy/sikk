@@ -1,8 +1,8 @@
 <style type="text/css">
-   .upper { text-transform: uppercase; }
-   .lower { text-transform: lowercase; }
-   .cap   { text-transform: capitalize; }
-   .small { font-variant:   small-caps; }
+    .upper { text-transform: uppercase; }
+    .lower { text-transform: lowercase; }
+    .cap   { text-transform: capitalize; }
+    .small { font-variant:   small-caps; }
 </style>
 
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
@@ -20,6 +20,12 @@
                 </span>
             </div>
         </div><br>
+        
+                <div class="progress progress-bar-gray">
+                    <div class="progress-bar bg-red" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%; border-radius: 0;">
+                        60% Lunas Uang Kas
+                    </div><br>
+                </div>
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-striped">
@@ -42,7 +48,7 @@
                         <tr>
                             <td>Pemasukan Uang Kas</td>
                             <td>:</td>
-                            <td><?php echo 'Rp '.number_format($student['student_budget'],2,',','.'); ?></td>
+                            <td><?php echo 'Rp ' . number_format($student['student_budget'], 2, ',', '.'); ?></td>
                         </tr>
                         <tr>
                             <td>No. Telepon</td>

@@ -51,15 +51,15 @@ class Auth extends CI_Controller {
 
         if ($this->form_validation->run() == TRUE) {
             $nip = $this->input->post('nip', TRUE);
-            $password = $this->input->post('password', TRUE);
+            $password = sha1($this->input->post('password', TRUE));
             $student = $this->Student_model->get(array('nip' => $nip, 'password' => $password));
             
 
             if ($student > 0) {
                 $this->session->set_userdata('logged_student', TRUE);
-                $this->session->set_userdata('student_id', $student[0]['student_id']);
-                $this->session->set_userdata('student_nip', $student[0]['student_nip']);
-                $this->session->set_userdata('student_name', $student[0]['student_name']);
+                $this->session->set_userdata('student_id', $student['student_id']);
+                $this->session->set_userdata('student_nip', $student['student_nip']);
+                $this->session->set_userdata('student_name', $student['student_name']);
                 if ($lokasi != '') {
                     header("Location:" . htmlspecialchars($lokasi));
                 } else {

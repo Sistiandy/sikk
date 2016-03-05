@@ -69,7 +69,7 @@ class Student_model extends CI_Model {
         $this->db->join('user', 'user.user_id = student.user_user_id', 'left');
         $res = $this->db->get('student');
 
-        if(isset($params['id']))
+        if(isset($params['id']) OR isset($params['nip']))
         {
             return $res->row_array();
         }
