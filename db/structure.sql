@@ -205,12 +205,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `input_transaction` (
   `transaction_id` INT NOT NULL AUTO_INCREMENT ,
-  `transaction_is_late` TINYINT(1) NULL DEFAULT 0 COMMENT '0=Tidak telat, 1=Telat' ,
   `periode_periode_id` INT NULL ,
   `student_student_id` INT NULL ,
   `transaction_input_date` TIMESTAMP NULL ,
   `transaction_last_update` TIMESTAMP NULL ,
   `user_user_id` INT(11) NULL ,
+  `input_transaction_value` DECIMAL(10,0) NULL ,
   PRIMARY KEY (`transaction_id`) ,
   INDEX `fk_periode_has_student_student1_idx` (`student_student_id` ASC) ,
   INDEX `fk_periode_has_student_periode1_idx` (`periode_periode_id` ASC) ,

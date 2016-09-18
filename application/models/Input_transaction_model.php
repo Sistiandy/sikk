@@ -52,11 +52,11 @@ class Input_transaction_model extends CI_Model {
             $this->db->order_by('transaction_last_update', 'desc');
         }
 
-        $this->db->select('input_transaction.transaction_id, transaction_is_late, 
+        $this->db->select('input_transaction.transaction_id, input_transaction_value,
             transaction_input_date, transaction_last_update');
         $this->db->select('input_transaction.user_user_id, user_name');
         $this->db->select('periode_periode_id, periode_date');
-        $this->db->select('student_student_id, student_name');
+        $this->db->select('student_student_id, student_name, student_nip');
         
         $this->db->join('user', 'user.user_id = input_transaction.user_user_id', 'left');
         $this->db->join('periode', 'periode.periode_id = input_transaction.periode_periode_id', 'left');
@@ -80,12 +80,12 @@ class Input_transaction_model extends CI_Model {
             $this->db->set('transaction_id', $data['transaction_id']);
         }
         
-         if(isset($data['transaction_is_late'])) {
-            $this->db->set('transaction_is_late', $data['transaction_is_late']);
-        }
-        
          if(isset($data['periode_id'])) {
             $this->db->set('periode_periode_id', $data['periode_id']);
+        }
+        
+         if(isset($data['input_transaction_value'])) {
+            $this->db->set('input_transaction_value', $data['input_transaction_value']);
         }
         
          if(isset($data['student_id'])) {

@@ -28,11 +28,6 @@
                             <td><?php echo $input_transaction['student_name'] ?></td>
                         </tr>
                         <tr>
-                            <td>Tunggakan</td>
-                            <td>:</td>
-                            <td><?php echo ($input_transaction['transaction_is_late'] == TRUE)? 'Ya' : 'Tidak' ?></td>
-                        </tr>
-                        <tr>
                             <td>Tanggal diinput</td>
                             <td>:</td>
                             <td><?php echo $input_transaction['transaction_input_date'] ?></td>

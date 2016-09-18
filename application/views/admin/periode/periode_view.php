@@ -1,6 +1,5 @@
-<?php
-$this->load->view('admin/multi_select');?>
-<div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
+<?php $this->load->view('admin/multi_select'); ?>
+<div class="col-md-12 col-sm-12 col-xs-12 main post-inherit" ng-controller="transactionCtrl">
     <div class="x_panel post-inherit">
         <div class="row">
             <div class="col-md-8">
@@ -27,7 +26,7 @@ $this->load->view('admin/multi_select');?>
                         <tr>
                             <td>Total yang didapat</td>
                             <td>:</td>
-                            <td><?php echo 'Rp ' . number_format($periode['periode_total_budget'], 2, ',', '.') ?></td>
+                            <td>Rp. {{ periode.periode_total_budget | number : fractionSize}}</td>
                         </tr>                       
                         <tr>
                             <td>Keterangan</td>
@@ -50,107 +49,89 @@ $this->load->view('admin/multi_select');?>
         </div>         
         <div class="row">
             <div class="col-md-12">
-               <h3>
-                Daftar Transaksi Pemasukan                
-                <a class="glyphicon glyphicon-plus-sign" data-toggle="modal" href="#modalTransaksi"></a> 
-                
-            </h3>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th class="controls" align="center">TANGGAL</th>
-                            <th class="controls" align="center">MAHASISWA</th>
-                            <th class="controls" align="center">AKSI</th>
-                        </tr>
-                    </thead>
-                    <?php
-                    if (!empty($transaction)) {
-                        foreach ($transaction as $row) {
-                            ?>
-                            <tbody>
-                                <tr>
-                                    <td ><?php echo pretty_date($row['periode_date'], 'd F Y', FALSE); ?></td>
-                                    <td ><?php echo $row['student_name']; ?></td>
-                                    <td>
-                                        <a class="btn btn-warning btn-xs" href="<?php echo site_url('admin/input_transaction/detail/' . $row['transaction_id']); ?>" ><span class="glyphicon glyphicon-eye-open"></span></a>
-                                        <a class="btn btn-success btn-xs" href="<?php echo site_url('admin/input_transaction/edit/' . $row['transaction_id']); ?>" ><span class="glyphicon glyphicon-edit"></span></a>
-                                    </td>
-                                </tr>
-                            </tbody>                            
-                            <?php
-                        }
-                    } else {
-                        ?>
-                        <tbody>
-                            <tr id="row">
-                                <td colspan="3" align="center">Data Kosong</td>
+                <h3>
+                    Daftar Transaksi Pemasukan                
+
+                </h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="controls" align="center">NO</th>
+                                <th class="controls" align="center">MAHASISWA</th>
+                                <th class="controls" align="center">NIP</th>
+                                <th class="controls" align="center">KETERANGAN <span ng-show="animate" class="fa fa-spin fa-spinner"></span></th>
                             </tr>
-                        </tbody>
-                        <?php
-                    }
-                    ?>   
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalTransaksi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <?php echo form_open_multipart(site_url('admin/periode/addtransaction/'.$periode['periode_id'])) ?>
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Tambah Transaksi Pemasukan</h4>
-                </div>
-                <div class="modal-body">                    
-                    <input type="hidden" name="from_list" value="TRUE" >
-                    <label >Tanggal Dikirim *</label>
-                    <div ng-controller="studentCtrl">
-                        <div ng-repeat="model in studentOutput">
-                            <input type="hidden" name="student_id[]" required value="{{model.student_id}}" ng-model="model.student_id">
-                        </div>
-                        <div
-                        isteven-multi-select
-                        input-model="student"
-                        output-model="studentOutput"
-                        default-label="Pilih Mahasiswa"
-                        button-label="student_name"
-                        item-label="student_name"
-                        max-labels="7"
-                        tick-property="ticked"
-                        ></div>
-                        </div
-                        <p style="color:#9C9C9C;margin-top: 5px"><i>*) Field Wajib Diisi</i></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                    <?php echo form_close() ?>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="studentTransaction in studentTransactions">
+                                <td >{{$index + 1}}</td>
+                                <td >{{studentTransaction.student_name}}</td>
+                                <td >{{studentTransaction.student_nip}}</td>
+                                <td ng-show="studentTransaction.input_transaction_value == NULL">
+                                    <div class="input-group input-group-sm">
+                                        <input type="number" class="form-control" ng-model="studentTransaction.value"> 
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-success" ng-disabled="!(!!studentTransaction.value)" ng-click="inputTransaction(studentTransaction)" type="button"><i class="fa fa-check"></i> Simpan</button>
+                                        </span>
+                                    </div><!-- /input-group -->
+
+                                </td>
+                                <td ng-show="studentTransaction.input_transaction_value != NULL">
+                                    <label><span class="ion-checkmark"></span> Sudah bayar</label>
+                                </td>
+                            </tr>
+                        </tbody>                            
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script>
-    var inputApp = angular.module("inputApp", ["isteven-multi-select"]);
+    var inputApp = angular.module("inputApp", []);
     var SITEURL = "<?php echo site_url() ?>";
-    inputApp.controller('studentCtrl', function($scope, $http) {
-        $scope.studentOutput = [];
-        $scope.student = [];
+    inputApp.controller('transactionCtrl', function ($scope, $http) {
+        $scope.studentTransactions = [];
+        $scope.periode = [];
+        $scope.animate = false;
+        $scope.getStudentTransaction = function () {
 
-        $scope.getInputTransaction = function() {
-
-            var url = SITEURL + 'admin/student/get_student';
-            $http.get(url).then(function(response) {
-                $scope.student = response.data;
+            var url = SITEURL + 'api/getPeriodeTransaction/<?php echo $periode['periode_id'] ?>';
+            $http.get(url).then(function (response) {
+                $scope.studentTransactions = response.data;
             })
 
         };
+        $scope.getPeriode = function () {
 
-        angular.element(document).ready(function() {
-            $scope.getInputTransaction();
+            var url = SITEURL + 'api/getPeriode/<?php echo $periode['periode_id'] ?>';
+            $http.get(url).then(function (response) {
+                $scope.periode = response.data;
+            })
+
+        };
+        $scope.inputTransaction = function (data) {
+            $scope.animate = true;
+            var postData = $.param({
+                input_transaction_value: data.value,
+                transaction_id: data.transaction_id,
+                periode_id: data.periode_periode_id,
+            });
+            $.ajax({
+                method: "POST",
+                url: SITEURL + "admin/input_transaction/input",
+                data: postData,
+                success: function (response) {
+                    $scope.animate = false;
+                    $scope.getStudentTransaction();
+                    $scope.getPeriode();
+                }
+            });
+        };
+        angular.element(document).ready(function () {
+            $scope.getStudentTransaction();
+            $scope.getPeriode();
         });
-
     });
 </script>

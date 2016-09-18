@@ -2,7 +2,6 @@
     <div class="x_panel post-inherit">
         <h3>
             Daftar Transaksi Pemasukan
-            <a href="<?php echo site_url('admin/input_transaction/add'); ?>" ><span class="glyphicon glyphicon-plus-sign"></span></a>
         </h3>
 
         <!-- Indicates a successful or positive action -->

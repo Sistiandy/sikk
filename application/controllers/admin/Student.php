@@ -39,7 +39,11 @@ class Student extends CI_Controller {
         if ($this->Student_model->get(array('id' => $id)) == NULL) {
             redirect('admin/student');
         }
+        $this->load->model('Input_transaction_model');
+        $data['ngapp'] = 'ng-app="inputApp"';
         $data['student'] = $this->Student_model->get(array('id' => $id));
+        $data['input_transaction'] = $this->Input_transaction_model->get(array('student_id' => $id));
+//      
         $data['title'] = 'Detail Pelajar';
         $data['main'] = 'admin/student/student_view';
         $this->load->view('admin/layout', $data);

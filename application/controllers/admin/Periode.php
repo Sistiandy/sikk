@@ -22,7 +22,7 @@ class Periode extends CI_Controller {
         $this->load->library('upload');
     }
 
-    // Periode view in list
+// Periode view in list
     public function index($offset = NULL) {
         $this->load->library('pagination');
         $data['periode'] = $this->Periode_model->get(array('limit' => 10, 'offset' => $offset, 'status' => TRUE));
@@ -39,7 +39,7 @@ class Periode extends CI_Controller {
         if ($this->Periode_model->get(array('id' => $id)) == NULL) {
             redirect('admin/periode');
         }
-        $data['ngapp'] = 'ng-app="inputApp"';        
+        $data['ngapp'] = 'ng-app="inputApp"';
         $data['student'] = $this->Student_model->get();
         $data['periode'] = $this->Periode_model->get(array('id' => $id));
         $data['transaction'] = $this->Input_transaction_model->get(array('periode_id' => $id));
@@ -48,8 +48,9 @@ class Periode extends CI_Controller {
         $this->load->view('admin/layout', $data);
     }
 
-    // Add Periode and Update
+// Add Periode and Update
     public function add($id = NULL) {
+        $this->load->model('Student_model');
         $this->load->library('form_validation');
         $this->form_validation->set_rules('periode_date', 'Date', 'trim|required|xss_clean');
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>', '</div>');
@@ -69,17 +70,27 @@ class Periode extends CI_Controller {
             $params['periode_description'] = $this->input->post('periode_description');
             $status = $this->Periode_model->add($params);
 
+            $student = $this->Student_model->get();
+            foreach ($student as $row) {
+                $param['user_id'] = $this->session->userdata('user_id');
+                $param['transaction_input_date'] = date('Y-m-d H:i:s');
+                $param['transaction_last_update'] = date('Y-m-d H:i:s');
+                $param['transaction_date'] = $this->input->post('transaction_date');
+                $param['periode_id'] = $status;
+                $param['student_id'] = $row['student_id'];
+                $this->Input_transaction_model->add($param);
+            }
 
-            // activity log
+// activity log
             $this->Activity_log_model->add(
-                array(
-                    'log_date' => date('Y-m-d H:i:s'),
-                    'user_id' => $this->session->userdata('user_id'),
-                    'log_module' => 'Periode',
-                    'log_action' => $data['operation'],
-                    'log_info' => 'ID:null;Date:' . $params['periode_date']
+                    array(
+                        'log_date' => date('Y-m-d H:i:s'),
+                        'user_id' => $this->session->userdata('user_id'),
+                        'log_module' => 'Periode',
+                        'log_action' => $data['operation'],
+                        'log_info' => 'ID:' . $status . ';Date:' . $params['periode_date']
                     )
-                );
+            );
 
             $this->session->set_flashdata('success', $data['operation'] . ' Periode berhasil');
             redirect('admin/periode');
@@ -88,7 +99,7 @@ class Periode extends CI_Controller {
                 redirect('admin/periode/edit/' . $this->input->post('periode_id'));
             }
 
-            // Edit mode
+// Edit mode
             if (!is_null($id)) {
                 $data['periode'] = $this->Periode_model->get(array('id' => $id));
             }
@@ -98,20 +109,20 @@ class Periode extends CI_Controller {
         }
     }
 
-    // Delete Periode
+// Delete Periode
     public function delete($id = NULL) {
         if ($_POST) {
             $this->Periode_model->delete($this->input->post('del_id'));
-            // activity log
+// activity log
             $this->Activity_log_model->add(
-                array(
-                    'log_date' => date('Y-m-d H:i:s'),
-                    'user_id' => $this->session->userdata('user_id'),
-                    'log_module' => 'Periode',
-                    'log_action' => 'Hapus',
-                    'log_info' => 'ID:' . $this->input->post('del_id') . ';Date:' . $this->input->post('del_name')
+                    array(
+                        'log_date' => date('Y-m-d H:i:s'),
+                        'user_id' => $this->session->userdata('user_id'),
+                        'log_module' => 'Periode',
+                        'log_action' => 'Hapus',
+                        'log_info' => 'ID:' . $this->input->post('del_id') . ';Date:' . $this->input->post('del_name')
                     )
-                );
+            );
             $this->session->set_flashdata('success', 'Hapus Periode berhasil');
             redirect('admin/periode');
         } elseif (!$_POST) {
@@ -152,24 +163,24 @@ class Periode extends CI_Controller {
                 }
 
 
-                // activity log
+// activity log
                 $this->Activity_log_model->add(
-                    array(
-                        'log_date' => date('Y-m-d H:i:s'),
-                        'user_id' => $this->session->userdata('user_id'),
-                        'log_module' => 'Input_transaction',
-                        'log_action' => $data['operation'],
-                        'log_info' => 'ID:null;Date:' . $params['transaction_date']
+                        array(
+                            'log_date' => date('Y-m-d H:i:s'),
+                            'user_id' => $this->session->userdata('user_id'),
+                            'log_module' => 'Input_transaction',
+                            'log_action' => $data['operation'],
+                            'log_info' => 'ID:null;Date:' . $params['transaction_date']
                         )
-                    );
+                );
             }
 
             $this->session->set_flashdata('success', $data['operation'] . ' Transaksi Kas berhasil');
-            redirect('admin/periode/detail/'. $id);
+            redirect('admin/periode/detail/' . $id);
         } else {
-            
 
-            // Edit mode
+
+// Edit mode
             if (!is_null($id)) {
                 $data['input_transaction'] = $this->Input_transaction_model->get(array('id' => $id));
             }

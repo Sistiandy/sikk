@@ -20,6 +20,7 @@ class Input_transaction extends CI_Controller {
         }
         $this->load->model(array('Input_transaction_model', 'Periode_model', 'Student_model', 'Activity_log_model'));
         $this->load->library('upload');
+        $this->load->helper(array('form', 'url'));
     }
 
     // Input_transaction view in list
@@ -80,14 +81,14 @@ class Input_transaction extends CI_Controller {
 
                 // activity log
                 $this->Activity_log_model->add(
-                        array(
-                            'log_date' => date('Y-m-d H:i:s'),
-                            'user_id' => $this->session->userdata('user_id'),
-                            'log_module' => 'Input_transaction',
-                            'log_action' => $data['operation'],
-                            'log_info' => 'ID:null;Date:' . $params['transaction_date']
+                    array(
+                        'log_date' => date('Y-m-d H:i:s'),
+                        'user_id' => $this->session->userdata('user_id'),
+                        'log_module' => 'Input_transaction',
+                        'log_action' => $data['operation'],
+                        'log_info' => 'ID:null;Date:' . $params['transaction_date']
                         )
-                );
+                    );
             }
 
             $this->session->set_flashdata('success', $data['operation'] . ' Transaksi Kas berhasil');
@@ -110,20 +111,38 @@ class Input_transaction extends CI_Controller {
         }
     }
 
+    public function input(){
+        $this->load->model('Periode_model');
+        if($_POST){
+            $params['transaction_last_update'] = date('Y-m-d H:i:s');
+            $params['transaction_id'] = $this->input->post('transaction_id');
+            $params['input_transaction_value'] = $this->input->post('input_transaction_value');
+            $status = $this->Input_transaction_model->add($params);
+            $this->Periode_model->add(array('increase_budget' => $this->input->post('input_transaction_value'), 'periode_id' =>  $this->input->post('periode_id')));
+            if ($this->input->is_ajax_request()) {
+                echo $params['transaction_id'];
+            } else {
+                redirect('admin/periode');
+            }
+        } else {
+            redirect('admin/dashboard');
+        }
+    }
+
     // Delete Input_transaction
     public function delete($id = NULL) {
         if ($_POST) {
             $this->Input_transaction_model->delete($this->input->post('del_id'));
             // activity log
             $this->Activity_log_model->add(
-                    array(
-                        'log_date' => date('Y-m-d H:i:s'),
-                        'user_id' => $this->session->userdata('user_id'),
-                        'log_module' => 'Input_transaction',
-                        'log_action' => 'Hapus',
-                        'log_info' => 'ID:' . $this->input->post('del_id') . ';Date:' . $this->input->post('del_name')
+                array(
+                    'log_date' => date('Y-m-d H:i:s'),
+                    'user_id' => $this->session->userdata('user_id'),
+                    'log_module' => 'Input_transaction',
+                    'log_action' => 'Hapus',
+                    'log_info' => 'ID:' . $this->input->post('del_id') . ';Date:' . $this->input->post('del_name')
                     )
-            );
+                );
             $this->session->set_flashdata('success', 'Hapus Transaksi Kas berhasil');
             redirect('admin/input_transaction');
         } elseif (!$_POST) {
