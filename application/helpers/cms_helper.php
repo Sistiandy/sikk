@@ -66,5 +66,13 @@ if (!function_exists('pretty_date')) {
         }
 
     }
+
+    function class_name() {
+        $CI = & get_instance();
+        $CI->load->model('Setting_model');
+        $result = $CI->Setting_model->get(array('id' => CLASS_NAME));
+        return $result['setting_value'];
+    }
+
 }
 ?>

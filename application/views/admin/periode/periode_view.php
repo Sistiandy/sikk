@@ -69,12 +69,7 @@
                                 <td >{{studentTransaction.student_name}}</td>
                                 <td >{{studentTransaction.student_nip}}</td>
                                 <td ng-show="studentTransaction.input_transaction_value == NULL">
-                                    <div class="input-group input-group-sm">
-                                        <input type="number" class="form-control" ng-model="studentTransaction.value"> 
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-success" ng-disabled="!(!!studentTransaction.value)" ng-click="inputTransaction(studentTransaction)" type="button"><i class="fa fa-check"></i> Simpan</button>
-                                        </span>
-                                    </div><!-- /input-group -->
+                                            <button class="btn btn-success btn-xs" ng-click="inputTransaction(studentTransaction)" type="button"><i class="fa fa-check"></i> Bayar</button>
 
                                 </td>
                                 <td ng-show="studentTransaction.input_transaction_value != NULL">
@@ -114,7 +109,6 @@
         $scope.inputTransaction = function (data) {
             $scope.animate = true;
             var postData = $.param({
-                input_transaction_value: data.value,
                 transaction_id: data.transaction_id,
                 periode_id: data.periode_periode_id,
             });

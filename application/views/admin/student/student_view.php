@@ -96,15 +96,10 @@
                             <div class="panel-body">
                                 <div ng-show="hutang > 0">
                                     <div ng-repeat="hutangTransaction in hutangTransactions" class="col-md-3">
-                                        <div class="alert alert-danger">
+                                        <div class="thumbnail">
                                             <center>
-                                                <span class="fa fa-calendar"></span> {{ hutangTransaction.periode_date | date :  'd MMMM, y' : timezone}}
-                                                <div class="input-group input-group-sm">
-                                                    <input type="number" class="form-control" style="color:#73879C;" ng-model="hutangTransaction.value"> 
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-success" ng-disabled="!(!!hutangTransaction.value)" ng-click="inputTransaction(hutangTransaction)" type="button"><i class="fa fa-check"></i> Simpan</button>
-                                                    </span>
-                                                </div><!-- /input-group -->
+                                                <span class="fa fa-calendar text-danger"></span> {{ hutangTransaction.periode_date | date :  'd MMMM y' : timezone}} 
+                                                <button class="btn btn-success btn-block" ng-click="inputTransaction(hutangTransaction)" type="button"><i class="fa fa-check"></i> Bayar</button>
                                             </center>
                                         </div>
                                     </div>
@@ -157,8 +152,7 @@
                         $scope.inputTransaction = function (data) {
                         $scope.animate = true;
                                 var postData = $.param({
-                                input_transaction_value: data.value,
-                                        transaction_id: data.transaction_id,
+                                transaction_id: data.transaction_id,
                                         periode_id: data.periode_periode_id,
                                 });
                                 $.ajax({

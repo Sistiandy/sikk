@@ -113,12 +113,14 @@ class Input_transaction extends CI_Controller {
 
     public function input(){
         $this->load->model('Periode_model');
+        $this->load->model('Setting_model');
         if($_POST){
+            $cash = $this->Setting_model->get(array('id' => CLASS_CASH));
             $params['transaction_last_update'] = date('Y-m-d H:i:s');
             $params['transaction_id'] = $this->input->post('transaction_id');
-            $params['input_transaction_value'] = $this->input->post('input_transaction_value');
+            $params['input_transaction_value'] = $cash['setting_value'];
             $status = $this->Input_transaction_model->add($params);
-            $this->Periode_model->add(array('increase_budget' => $this->input->post('input_transaction_value'), 'periode_id' =>  $this->input->post('periode_id')));
+            $this->Periode_model->add(array('increase_budget' => $cash['setting_value'], 'periode_id' =>  $this->input->post('periode_id')));
             if ($this->input->is_ajax_request()) {
                 echo $params['transaction_id'];
             } else {
