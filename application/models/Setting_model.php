@@ -3,6 +3,15 @@
 if (!defined('BASEPATH'))
     exit('No direct script are allowed');
 
+/** 
+* Setting Model Class
+ *
+ * @package     SYSCMS
+ * @subpackage  Models
+ * @category    Models
+ * @author      Sistiandy Syahbana nugraha <sistiandy.web.id>
+ */
+
 class Setting_model extends CI_Model {
 
     public function get($param = array()) {

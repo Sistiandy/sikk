@@ -2,6 +2,14 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Api controllers class
+ *
+ * @package     SYSCMS
+ * @subpackage  Controllers
+ * @category    Controllers
+ * @author      Sistiandy Syahbana nugraha <sistiandy.web.id>
+ */
 class Api extends CI_Controller {
 
     public function __construct() {
