@@ -25,12 +25,9 @@ class Output_transaction extends CI_Controller {
     // Input_transaction view in list
     public function index($offset = NULL) {
         $this->load->library('pagination');
-        $data['output'] = $this->Output_transaction_model->get(array('limit' => 10, 'offset' => $offset, 'status' => TRUE));
-        $config['base_url'] = site_url('admin/output_transaction/index');
-        $config['total_rows'] = count($this->Output_transaction_model->get(array('status' => TRUE)));
-        $this->pagination->initialize($config);
+        $data['output'] = $this->Output_transaction_model->get(array('status' => TRUE));
 
-        $data['title'] = 'output_transaction';
+        $data['title'] = 'Transaksi Pengeluaran';
         $data['main'] = 'admin/output_transaction/output_transaction_list';
         $this->load->view('admin/layout', $data);
     }
@@ -40,7 +37,7 @@ class Output_transaction extends CI_Controller {
             redirect('admin/output_transaction');
         }
         $data['output'] = $this->Output_transaction_model->get(array('id' => $id));
-        $data['title'] = 'Detail Output_transaction';
+        $data['title'] = 'Detail Transaksi Pengeluaran';
         $data['main'] = 'admin/output_transaction/output_transaction_view';
         $this->load->view('admin/layout', $data);
     }
@@ -91,7 +88,7 @@ class Output_transaction extends CI_Controller {
             if (!is_null($id)) {
                 $data['output'] = $this->Output_transaction_model->get(array('id' => $id));
             }
-            $data['title'] = $data['operation'] . ' Transaksi Kas';
+            $data['title'] = $data['operation'] . ' Transaksi Pengeluaran';
             $data['main'] = 'admin/output_transaction/output_transaction_add';
             $this->load->view('admin/layout', $data);
         }
@@ -111,7 +108,7 @@ class Output_transaction extends CI_Controller {
                         'log_info' => 'ID:' . $this->input->post('del_id') . ';Date:' . $this->input->post('del_name')
                     )
             );
-            $this->session->set_flashdata('success', 'Hapus Transaksi Kas berhasil');
+            $this->session->set_flashdata('success', 'Hapus Transaksi Pengeluaran berhasil');
             redirect('admin/output_transaction');
         } elseif (!$_POST) {
             $this->session->set_flashdata('delete', 'Delete');

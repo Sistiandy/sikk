@@ -15,19 +15,18 @@ if (isset($user)) {
     $inputDescValue = set_value('user_description');
 }
 ?>
-<?php echo isset($alert) ? ' ' . $alert : null; ?>
-<?php echo validation_errors(); ?>
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
     <div class="x_panel post-inherit">
-        <div class="col-lg-12">
+        <div class="row x_title">
             <h3><?php echo $operation ?> Pengguna</h3>
             <br>
         </div>
         <!-- /.col-lg-12 -->
 
         <?php echo form_open_multipart(current_url()); ?>
-        <div class="col-md-12">
+        <div class="row x_content">
             <div class="col-sm-12 col-md-9">
+                <?php echo validation_errors(); ?>
                 <?php if (isset($user)): ?>
                     <input type="hidden" name="user_id" value="<?php echo $user['user_id'] ?>" />
                 <?php endif; ?>
@@ -43,7 +42,7 @@ if (isset($user)) {
                     <input type="password" placeholder="Konfirmasi Password" name="passconf" class="form-control">
                     <p style="color:#9C9C9C;margin-top: 5px"><i>Password minimal 6 karakter</i></p>
                 <?php endif; ?>
-                <label >Role *</label>
+                <label >Peran *</label>
                 <select name="role_id" class="form-control">
                     <?php
                     if (!empty($role)) {
@@ -63,7 +62,7 @@ if (isset($user)) {
                 <input type="text" name="user_email" placeholder="Email" class="form-control" value="<?php echo $inputEmailValue; ?>">
                 <p style="color:#9C9C9C;margin-top: 5px"><i>Contoh : example@yahoo.com / example@example.com</i></p>
                 <label>Deskripsi </label>
-                <textarea name="user_description" class="form-control mce-init" rows="5" placeholder="Deskripsi pengguna"><?php echo $inputDescValue; ?></textarea><br>
+                <textarea name="user_description" class="form-control" placeholder="Deskripsi pengguna"><?php echo $inputDescValue; ?></textarea><br>
                 <p style="color:#9C9C9C;margin-top: 5px"><i>*) Wajib diisi</i></p>
             </div>
             <div class="col-sm-12 col-xs-12 col-md-3">
@@ -114,7 +113,7 @@ if (isset($user)) {
     </div><!-- /.modal -->
     <?php if ($this->session->flashdata('delete')) { ?>
         <script type = "text/javascript">
-            $(window).load(function() {
+            $(window).load(function () {
                 $('#confirm-del').modal('show');
             });
         </script>

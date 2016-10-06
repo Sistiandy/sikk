@@ -1,6 +1,6 @@
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
     <div class="x_panel post-inherit">
-        <div class="row">
+        <div class="row x_title">
             <div class="col-md-8">
                 <h3>
                     Detail Transaksi Pemasukan
@@ -8,8 +8,7 @@
             </div>
             <div class="col-md-4">
                 <span class=" pull-right">
-                    <a href="<?php echo site_url('admin/input_transaction') ?>" class="btn btn-info"><span class="fa fa-arrow-left"></span>&nbsp; Kembali</a> 
-                    <a href="<?php echo site_url('admin/input_transaction/edit/' . $input_transaction['transaction_id']) ?>" class="btn btn-success"><span class="fa fa-edit"></span>&nbsp; Edit</a> 
+                    <a href="<?php echo site_url('admin/input_transaction') ?>" class="btn btn-info"><i class="fa fa-arrow-left"></i>&nbsp; Kembali</a> 
                 </span>
             </div>
         </div><br>
@@ -26,6 +25,11 @@
                             <td>Mahasiswa</td>
                             <td>:</td>
                             <td><?php echo $input_transaction['student_name'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Sejumlah</td>
+                            <td>:</td>
+                            <td>Rp. <?php echo $input_transaction['input_transaction_value'] ?></td>
                         </tr>
                         <tr>
                             <td>Tanggal diinput</td>

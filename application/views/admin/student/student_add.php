@@ -2,7 +2,7 @@
 $this->load->view('admin/datepicker');
 if (isset($student)) {
     $inputNip = $student['student_nip'];
-    $inputName = $student['student_name'];    
+    $inputName = $student['student_name'];
     $inputPlace = $student['student_place_birth'];
     $inputBirth = $student['student_birth_date'];
     $inputPhone = $student['student_phone'];
@@ -10,7 +10,7 @@ if (isset($student)) {
     $inputAddress = $student['student_address'];
 } else {
     $inputNip = set_value('student_nip');
-    $inputName = set_value('student_name');    
+    $inputName = set_value('student_name');
     $inputPlace = set_value('student_place_birth');
     $inputBirth = set_value('student_birth_date');
     $inputPhone = set_value('student_phone');
@@ -19,22 +19,22 @@ if (isset($student)) {
 }
 ?>
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
-    <div class="x_panel post-inherit">
-        <?php if (!isset($student)) echo validation_errors(); ?>
+    <div class="x_panel">
         <?php echo form_open_multipart(current_url()); ?>
-        <div>
-            <h3><?php echo $operation; ?> Mahasiswa</h3><br>
+        <div class="row x_title">
+            <h3><?php echo $operation; ?> Mahasiswa</h3>
         </div>
 
-        <div class="row">
+        <div class="row x_content">
             <div class="col-sm-9 col-md-9">
+                <?php echo validation_errors(); ?>
                 <?php if (isset($student)): ?>
                     <input type="hidden" name="student_id" value="<?php echo $student['student_id']; ?>" />
                 <?php endif; ?>
                 <label >NPM *</label>
-                <input name="student_nip" <?php echo (isset($student)? 'disabled' : '') ?> placeholder="NPM" type="text" class="form-control" value="<?php echo $inputNip; ?>"><br>
+                <input name="student_nip" <?php echo (isset($student) ? 'disabled' : '') ?> placeholder="NPM" type="text" class="form-control" value="<?php echo $inputNip; ?>"><br>
                 <label >Nama Lengkap *</label>
-                <input name="student_name" <?php echo (isset($student)? 'disabled' : '') ?> placeholder="Nama Lengkap" type="text" class="form-control" value="<?php echo $inputName; ?>"><br>
+                <input name="student_name" <?php echo (isset($student) ? 'disabled' : '') ?> placeholder="Nama Lengkap" type="text" class="form-control" value="<?php echo $inputName; ?>"><br>
                 <?php if (!isset($student)): ?>
                     <label >Password *</label>
                     <input type="password" placeholder="Password" name="student_password" class="form-control"><br>
@@ -43,7 +43,7 @@ if (isset($student)) {
                     <p style="color:#9C9C9C;margin-top: 5px"><i>Password minimal 6 karakter</i></p>
                 <?php endif; ?>
                 <label >Tempat Lahir *</label>
-                <input name="student_place_birth" <?php echo (isset($student)? 'disabled' : '') ?> placeholder="Tempat Lahir" type="text" class="form-control" value="<?php echo $inputPlace; ?>"><br>
+                <input name="student_place_birth" <?php echo (isset($student) ? 'disabled' : '') ?> placeholder="Tempat Lahir" type="text" class="form-control" value="<?php echo $inputPlace; ?>"><br>
                 <label >Tanggal Lahir *</label>
                 <input name="student_birth_date" placeholder="Tanggal Lahir" type="text" class="form-control datepicker" value="<?php echo $inputBirth; ?>"><br>
                 <label >No. Telepon *</label>
@@ -93,7 +93,7 @@ if (isset($student)) {
     </div><!-- /.modal -->
     <?php if ($this->session->flashdata('delete')) { ?>
         <script type="text/javascript">
-            $(window).load(function() {
+            $(window).load(function () {
                 $('#confirm-del').modal('show');
             });
         </script>

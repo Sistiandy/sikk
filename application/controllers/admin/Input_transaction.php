@@ -26,12 +26,12 @@ class Input_transaction extends CI_Controller {
     // Input_transaction view in list
     public function index($offset = NULL) {
         $this->load->library('pagination');
-        $data['input_transaction'] = $this->Input_transaction_model->get(array('limit' => 10, 'offset' => $offset, 'status' => TRUE));
+        $data['input_transaction'] = $this->Input_transaction_model->get(array('limit' => 10, 'offset' => $offset, 'status'=>TRUE));
         $config['base_url'] = site_url('admin/input_transaction/index');
-        $config['total_rows'] = count($this->Input_transaction_model->get(array('status' => TRUE)));
+        $config['total_rows'] = count($this->Input_transaction_model->get(array('status'=>TRUE)));
         $this->pagination->initialize($config);
 
-        $data['title'] = 'Input_transaction';
+        $data['title'] = 'Transaksi Pemasukan';
         $data['main'] = 'admin/input_transaction/input_transaction_list';
         $this->load->view('admin/layout', $data);
     }
@@ -41,7 +41,7 @@ class Input_transaction extends CI_Controller {
             redirect('admin/input_transaction');
         }
         $data['input_transaction'] = $this->Input_transaction_model->get(array('id' => $id));
-        $data['title'] = 'Detail Input_transaction';
+        $data['title'] = 'Detail Transaksi Pemasukan';
         $data['main'] = 'admin/input_transaction/input_transaction_view';
         $this->load->view('admin/layout', $data);
     }
@@ -91,7 +91,7 @@ class Input_transaction extends CI_Controller {
                     );
             }
 
-            $this->session->set_flashdata('success', $data['operation'] . ' Transaksi Kas berhasil');
+            $this->session->set_flashdata('success', $data['operation'] . ' Transaksi Pemasukan berhasil');
             redirect('admin/input_transaction');
         } else {
             if ($this->input->post('transaction_id')) {
@@ -145,7 +145,7 @@ class Input_transaction extends CI_Controller {
                     'log_info' => 'ID:' . $this->input->post('del_id') . ';Date:' . $this->input->post('del_name')
                     )
                 );
-            $this->session->set_flashdata('success', 'Hapus Transaksi Kas berhasil');
+            $this->session->set_flashdata('success', 'Hapus Transaksi Pemasukan berhasil');
             redirect('admin/input_transaction');
         } elseif (!$_POST) {
             $this->session->set_flashdata('delete', 'Delete');

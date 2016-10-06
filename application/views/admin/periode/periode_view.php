@@ -1,7 +1,7 @@
 <?php $this->load->view('admin/multi_select'); ?>
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit" ng-controller="transactionCtrl">
     <div class="x_panel post-inherit">
-        <div class="row">
+        <div class="row x_title">
             <div class="col-md-8">
                 <h3>
                     Detail Periode
@@ -9,12 +9,12 @@
             </div>
             <div class="col-md-4">
                 <span class=" pull-right">
-                    <a href="<?php echo site_url('admin/periode') ?>" class="btn btn-info"><span class="fa fa-arrow-left"></span>&nbsp; Kembali</a> 
-                    <a href="<?php echo site_url('admin/periode/edit/' . $periode['periode_id']) ?>" class="btn btn-success"><span class="fa fa-edit"></span>&nbsp; Edit</a> 
+                    <a href="<?php echo site_url('admin/periode') ?>" class="btn btn-info"><i class="fa fa-arrow-left"></i>&nbsp; Kembali</a> 
+                    <a href="<?php echo site_url('admin/periode/edit/' . $periode['periode_id']) ?>" class="btn btn-success"><i class="fa fa-edit"></i>&nbsp; Edit</a> 
                 </span>
             </div>
-        </div><br>
-        <div class="row">
+        </div>
+        <div class="row x_content">
             <div class="col-md-12">
                 <table class="table table-striped">
                     <tbody>
@@ -47,12 +47,20 @@
                 </table>
             </div>
         </div>         
-        <div class="row">
+        
+    </div>
+    <div class="x_panel">
+        <div class="x_title">
+            <h3>Daftar Transaksi Pemasukan</h3>
+            <ul class="nav navbar-right panel_toolbox">
+                <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
             <div class="col-md-12">
-                <h3>
-                    Daftar Transaksi Pemasukan                
-
-                </h3>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -81,8 +89,10 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
 </div>
+
 <script>
     var inputApp = angular.module("inputApp", []);
     var SITEURL = "<?php echo site_url() ?>";

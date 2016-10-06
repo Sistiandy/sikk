@@ -14,6 +14,8 @@
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo site_url('admin/student') ?>">Daftar Mahasiswa</a>
                     </li>
+                    <li><a href="<?php echo site_url('admin/student/add') ?>">Tambah Mahasiswa</a>
+                    </li>
                 </ul>
             </li>
 
@@ -29,6 +31,8 @@
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo site_url('admin/periode') ?>">Daftar Periode</a>
                     </li>
+                    <li><a href="<?php echo site_url('admin/periode/add') ?>">Tambah Periode</a>
+                    </li>
                 </ul>
             </li>
 
@@ -42,6 +46,7 @@
             <li><a><i class="fa fa-users"></i> Pengguna <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo site_url('admin/user') ?>">Daftar Pengguna</a>
+                    <li><a href="<?php echo site_url('admin/user/add') ?>">Tambah Pengguna</a>
                     </li>
                 </ul>
             </li>

@@ -5,25 +5,24 @@ if (isset($output)) {
     $inputTitle = $output['transaction_title'];
     $inputDate = $output['transaction_date'];
     $inputDesc = $output['transaction_description'];
-    $inputBudget = $output['transaction_budget'];       
-} else {   
+    $inputBudget = $output['transaction_budget'];
+} else {
     $inputTitle = set_value('transaction_title');
     $inputDate = set_value('transaction_date');
     $inputDesc = set_value('transaction_description');
     $inputBudget = set_value('transaction_budget');
-    
 }
 ?>
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
-    <div class="x_panel post-inherit">
-        <?php if (!isset($output)) echo validation_errors(); ?>
+    <div class="x_panel">
         <?php echo form_open_multipart(current_url()); ?>
-        <div>
-            <h3><?php echo $operation; ?> Transaksi Keluar</h3><br>
+        <div class="row x_title">
+            <h3><?php echo $operation; ?> Transaksi Keluar</h3>
         </div>
 
-        <div class="row">
+        <div class="row x_content">
             <div class="col-sm-9 col-md-9">
+                <?php echo validation_errors(); ?>
                 <?php if (isset($output)): ?>
                     <input type="hidden" name="output_transaction_id" value="<?php echo $output['output_transaction_id']; ?>" />
                 <?php endif; ?>
@@ -34,9 +33,7 @@ if (isset($output)) {
                 <label >Jumlah Rupiah *</label>
                 <input name="transaction_budget" placeholder="Masukan Rupiah" type="text" class="form-control" value="<?php echo $inputBudget; ?>"><br>
                 <label >Keterangan Transaksi *</label>
-                <textarea name="transaction_description" placeholder="Keterangan" type="text" class="form-control">
-                <?php echo $inputDesc; ?>
-                </textarea><br>
+                <textarea name="transaction_description" placeholder="Keterangan transaksi" class="form-control"><?php echo $inputDesc; ?></textarea><br>
 
                 <p style="color:#9C9C9C;margin-top: 5px"><i>*) Field Wajib Diisi</i></p>
             </div>
@@ -78,11 +75,11 @@ if (isset($output)) {
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <?php if ($this->session->flashdata('delete')) { ?>
-    <script type="text/javascript">
-        $(window).load(function() {
-            $('#confirm-del').modal('show');
-        });
-    </script>
+        <script type="text/javascript">
+            $(window).load(function () {
+                $('#confirm-del').modal('show');
+            });
+        </script>
     <?php }
     ?>
 <?php endif; ?>

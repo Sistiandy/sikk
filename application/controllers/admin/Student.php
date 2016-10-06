@@ -25,10 +25,7 @@ class Student extends CI_Controller {
     // Student view in list
     public function index($offset = NULL) {
         $this->load->library('pagination');
-        $data['student'] = $this->Student_model->get(array('limit' => 10, 'offset' => $offset, 'status' => TRUE));
-        $config['base_url'] = site_url('admin/student/index');
-        $config['total_rows'] = count($this->Student_model->get(array('status' => TRUE)));
-        $this->pagination->initialize($config);
+        $data['student'] = $this->Student_model->get(array('status' => TRUE));
 
         $data['title'] = 'Pelajar';
         $data['main'] = 'admin/student/student_list';

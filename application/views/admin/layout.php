@@ -23,6 +23,9 @@
 
         <!-- Custom styling plus plugins -->
         <link href="<?php echo media_url() ?>/css/custom.css" rel="stylesheet">
+        
+        <!-- data tables plugins -->
+        <link href="<?php echo media_url() ?>/css/dataTables.bootstrap.css" rel="stylesheet">
 
         <script src="<?php echo media_url() ?>/js/jquery.min.js"></script>
         <script src="<?php echo media_url(); ?>/js/angular.min.js"></script>
@@ -37,7 +40,7 @@
               <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
               <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
             <![endif]-->
-        
+
         <script type="text/javascript">
             var BASEURL = '<?php echo base_url() ?>';
         </script>
@@ -56,7 +59,7 @@
                     <div class="left_col scroll-view">
 
                         <div class="navbar nav_title" style="border: 0;">
-                            <a href="index.html" class="site_title"><i class="fa fa-mortar-board"></i> <span><?php echo (class_name() != '-')? class_name() : 'SYSCMS'; ?></span></a>
+                            <a href="<?php echo site_url('admin/'); ?>" class="site_title"><i class="fa fa-mortar-board"></i> <span><?php echo (class_name() != '-') ? class_name() : 'SYSCMS'; ?></span></a>
                         </div>
                         <div class="clearfix"></div>
 
@@ -87,16 +90,16 @@
 
                 <!-- top navigation -->
                 <div class="top_nav">
-                        <?php
-                        if ($this->session->flashdata('success')) {
-                            $data['message'] = $this->session->flashdata('success');
-                            $this->load->view('admin/notification_success', $data);
-                        }
-                        if ($this->session->flashdata('failed')) {
-                            $data['message'] = $this->session->flashdata('failed');
-                            $this->load->view('admin/notification_failed', $data);
-                        }
-                        ?>
+                    <?php
+                    if ($this->session->flashdata('success')) {
+                        $data['message'] = $this->session->flashdata('success');
+                        $this->load->view('admin/notification_success', $data);
+                    }
+                    if ($this->session->flashdata('failed')) {
+                        $data['message'] = $this->session->flashdata('failed');
+                        $this->load->view('admin/notification_failed', $data);
+                    }
+                    ?>
 
                     <div class="nav_menu">
                         <nav class="" role="navigation">
@@ -168,7 +171,27 @@
             <script src="<?php echo media_url() ?>/js/custom.js"></script>
             <script src="<?php echo media_url() ?>/js/jquery.nicescroll.min.js"></script>
 
-
+            <!-- Datatables -->
+            <script src="<?php echo media_url() ?>/js/jquery.dataTables.js"></script>
+            <script src="<?php echo media_url() ?>/js/dataTables.tableTools.js"></script>
+            <script>
+                                //Initiation dataTable
+                                $(function () {
+                                    $('.dataTable_init').DataTable({
+                                        "aaSorting": [],
+                                        "oLanguage": {
+                                            "sSearch": "Pencarian :"
+                                        },
+                                        "aoColumnDefs": [
+                                            {
+                                                'bSortable': false,
+                                                'aTargets': [-1]
+                                            } //disables sorting for last column
+                                        ],
+                                        "sPaginationType": "full_numbers",
+                                    });
+                                });
+            </script>
     </body>
 
 </html>

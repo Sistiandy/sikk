@@ -1,14 +1,16 @@
-<div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
-    <div class="x_panel post-inherit">
-        <h3>
-            Daftar Periode
-            <a href="<?php echo site_url('admin/periode/add'); ?>" ><span class="glyphicon glyphicon-plus-sign"></span></a>
-        </h3>
-
-        <!-- Indicates a successful or positive action -->
-
-        <div class="table-responsive">
-            <table class="table table-striped">
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h3>Periode <small>List</small></h3>
+            <ul class="nav navbar-right panel_toolbox">
+                <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                <li class="pull-right"><a href="<?php echo site_url('admin/periode/add'); ?>" class="btn btn-xs btn-success"><i class="fa fa-plus-circle"></i> Tambah</a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <table class="table table-striped responsive-utilities jambo_table dataTable_init">
                 <thead>
                     <tr>
                         <th class="controls" align="center">TANGGAL</th>
@@ -16,36 +18,25 @@
                         <th class="controls" align="center">AKSI</th>
                     </tr>
                 </thead>
-                <?php
-                if (!empty($periode)) {
-                    foreach ($periode as $row) {
-                        ?>
-                        <tbody>
+                <tbody>
+                    <?php
+                    if (count($periode) > 0) {
+                        foreach ($periode as $row) {
+                            ?>
                             <tr>
                                 <td ><?php echo pretty_date($row['periode_date'], 'd F Y', FALSE); ?></td>
                                 <td ><?php echo 'Rp ' . number_format($row['periode_total_budget'], 2, ',', '.'); ?></td>
                                 <td>
-                                    <a class="btn btn-warning btn-xs" href="<?php echo site_url('admin/periode/detail/' . $row['periode_id']); ?>" ><span class="glyphicon glyphicon-eye-open"></span></a>
-                                    <a class="btn btn-success btn-xs" href="<?php echo site_url('admin/periode/edit/' . $row['periode_id']); ?>" ><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a class="text-warning" href="<?php echo site_url('admin/periode/detail/' . $row['periode_id']); ?>" ><span class="glyphicon glyphicon-eye-open"></span></a>
+                                    <a class="text-success" href="<?php echo site_url('admin/periode/edit/' . $row['periode_id']); ?>" ><span class="glyphicon glyphicon-edit"></span></a>
                                 </td>
                             </tr>
-                        </tbody>
-                        <?php
+                            <?php
+                        }
                     }
-                } else {
-                    ?>
-                    <tbody>
-                        <tr id="row">
-                            <td colspan="3" align="center">Data Kosong</td>
-                        </tr>
-                    </tbody>
-                    <?php
-                }
-                ?>   
+                    ?>   
+                </tbody>
             </table>
-        </div>
-        <div >
-            <?php echo $this->pagination->create_links(); ?>
         </div>
     </div>
 </div>

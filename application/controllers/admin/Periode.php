@@ -25,10 +25,7 @@ class Periode extends CI_Controller {
 // Periode view in list
     public function index($offset = NULL) {
         $this->load->library('pagination');
-        $data['periode'] = $this->Periode_model->get(array('limit' => 10, 'offset' => $offset, 'status' => TRUE));
-        $config['base_url'] = site_url('admin/periode/index');
-        $config['total_rows'] = count($this->Periode_model->get(array('status' => TRUE)));
-        $this->pagination->initialize($config);
+        $data['periode'] = $this->Periode_model->get();
 
         $data['title'] = 'Periode';
         $data['main'] = 'admin/periode/periode_list';
@@ -70,15 +67,17 @@ class Periode extends CI_Controller {
             $params['periode_description'] = $this->input->post('periode_description');
             $status = $this->Periode_model->add($params);
 
-            $student = $this->Student_model->get();
-            foreach ($student as $row) {
-                $param['user_id'] = $this->session->userdata('user_id');
-                $param['transaction_input_date'] = date('Y-m-d H:i:s');
-                $param['transaction_last_update'] = date('Y-m-d H:i:s');
-                $param['transaction_date'] = $this->input->post('transaction_date');
-                $param['periode_id'] = $status;
-                $param['student_id'] = $row['student_id'];
-                $this->Input_transaction_model->add($param);
+            if (!$this->input->post('periode_id')) {
+                $student = $this->Student_model->get();
+                foreach ($student as $row) {
+                    $param['user_id'] = $this->session->userdata('user_id');
+                    $param['transaction_input_date'] = date('Y-m-d H:i:s');
+                    $param['transaction_last_update'] = date('Y-m-d H:i:s');
+                    $param['transaction_date'] = $this->input->post('transaction_date');
+                    $param['periode_id'] = $status;
+                    $param['student_id'] = $row['student_id'];
+                    $this->Input_transaction_model->add($param);
+                }
             }
 
 // activity log

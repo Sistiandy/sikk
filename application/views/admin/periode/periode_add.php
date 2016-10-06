@@ -11,19 +11,19 @@ if (isset($periode)) {
 ?>
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
     <div class="x_panel post-inherit">
-        <?php if (!isset($periode)) echo validation_errors(); ?>
         <?php echo form_open_multipart(current_url()); ?>
-        <div>
+        <div class="row x_title">
             <h3><?php echo $operation; ?> Periode</h3><br>
         </div>
 
-        <div class="row">
+        <div class="row x_content">
             <div class="col-sm-9 col-md-9">
+                <?php echo validation_errors(); ?>
                 <?php if (isset($periode)): ?>
                     <input type="hidden" name="periode_id" value="<?php echo $periode['periode_id']; ?>" />
                 <?php endif; ?>
                 <label >Tanggal *</label>
-                <input name="periode_date" placeholder="Tanggal" type="text" class="datepicker form-control" value="<?php echo $inputDate; ?>"><br>
+                <input name="periode_date" placeholder="Tanggal" <?php echo (isset($periode)? 'readonly' : '') ?> type="text" class="datepicker form-control" value="<?php echo $inputDate; ?>"><br>
                 <label >Keterangan </label>
                 <textarea name="periode_description" placeholder="Description" type="text" class="form-control"><?php echo $inputDescription; ?></textarea><br>
                 <p style="color:#9C9C9C;margin-top: 5px"><i>*) Field Wajib Diisi</i></p>
@@ -67,7 +67,7 @@ if (isset($periode)) {
     </div><!-- /.modal -->
     <?php if ($this->session->flashdata('delete')) { ?>
         <script type="text/javascript">
-            $(window).load(function() {
+            $(window).load(function () {
                 $('#confirm-del').modal('show');
             });
         </script>

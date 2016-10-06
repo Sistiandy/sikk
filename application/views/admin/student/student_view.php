@@ -6,7 +6,7 @@
 </style>
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit" ng-controller="StudentCtrl">
     <div class="x_panel post-inherit">
-        <div class="row">
+        <div class="row x_title">
             <div class="col-md-8">
                 <h3>
                     Detail Mahasiswa
@@ -14,18 +14,21 @@
             </div>
             <div class="col-md-4">
                 <span class=" pull-right">
-                    <a href="<?php echo site_url('admin/student') ?>" class="btn btn-info"><span class="fa fa-arrow-left"></span>&nbsp; Kembali</a> 
-                    <a href="<?php echo site_url('admin/student/edit/' . $student['student_id']) ?>" class="btn btn-success"><span class="fa fa-edit"></span>&nbsp; Edit</a> 
+                    <a href="<?php echo site_url('admin/student') ?>" class="btn btn-info"><i class="fa fa-arrow-left"></i>&nbsp; Kembali</a> 
+                    <a href="<?php echo site_url('admin/student/edit/' . $student['student_id']) ?>" class="btn btn-success"><i class="fa fa-edit"></i>&nbsp; Edit</a> 
                 </span>
             </div>
-        </div><br>
-
-        <div class="progress progress-bar-gray">
-            <div ng-show="hutang > 0" class="progress-bar bg-red" role="progressbar" aria-valuenow="{{jml}}" aria-valuemin="0" aria-valuemax="100" style="width: {{jml}}%; border-radius: 0;">
-                {{jml}}% Lunas Uang Kas
-            </div>
-            <div ng-show="hutang < 1" class="progress-bar bg-green" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; border-radius: 0;">
-                100% Lunas Uang Kas
+        </div>
+        <div class="row x_content">
+            <div class="col-md-12">
+                <div class="progress progress-bar-gray">
+                    <div ng-show="hutang > 0" class="progress-bar bg-red" role="progressbar" aria-valuenow="{{jml}}" aria-valuemin="0" aria-valuemax="100" style="width: {{jml}}%; border-radius: 0;">
+                        {{jml}}% Lunas Uang Kas
+                    </div>
+                    <div ng-show="hutang < 1" class="progress-bar bg-green" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; border-radius: 0;">
+                        100% Lunas Uang Kas
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">

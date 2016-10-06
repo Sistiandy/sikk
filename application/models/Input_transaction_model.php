@@ -32,6 +32,11 @@ class Input_transaction_model extends CI_Model {
         {
             $this->db->where('student_student_id', $params['student_id']);
         }
+        
+        if(isset($params['status']))
+        {
+            $this->db->where('input_transaction_value !=', NULL);
+        }
 
         if(isset($params['limit']))
         {
@@ -55,7 +60,7 @@ class Input_transaction_model extends CI_Model {
         $this->db->select('input_transaction.transaction_id, input_transaction_value,
             transaction_input_date, transaction_last_update');
         $this->db->select('input_transaction.user_user_id, user_name');
-        $this->db->select('periode_periode_id, periode_date');
+        $this->db->select('periode_periode_id, periode_date, periode_description');
         $this->db->select('student_student_id, student_name, student_nip');
         
         $this->db->join('user', 'user.user_id = input_transaction.user_user_id', 'left');
