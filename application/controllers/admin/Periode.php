@@ -183,7 +183,7 @@ class Periode extends CI_Controller {
             if (!is_null($id)) {
                 $data['input_transaction'] = $this->Input_transaction_model->get(array('id' => $id));
             }
-            $data['ngapp'] = 'ng-app="inputApp"';
+            $data['ngapp'] = 'ngapp="inputApp"';
             $data['periode'] = $this->Periode_model->get();
             $data['student'] = $this->Student_model->get();
             $data['title'] = $data['operation'] . ' Transaksi Kas';
