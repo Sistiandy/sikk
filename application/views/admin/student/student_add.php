@@ -34,7 +34,7 @@ if (isset($student)) {
                 <label >NPM *</label>
                 <input name="student_nip" <?php echo (isset($student) ? 'disabled' : '') ?> placeholder="NPM" type="text" class="form-control" value="<?php echo $inputNip; ?>"><br>
                 <label >Nama Lengkap *</label>
-                <input name="student_name" <?php echo (isset($student) ? 'disabled' : '') ?> placeholder="Nama Lengkap" type="text" class="form-control" value="<?php echo $inputName; ?>"><br>
+                <input name="student_name" placeholder="Nama Lengkap" type="text" class="form-control" value="<?php echo $inputName; ?>"><br>
                 <?php if (!isset($student)): ?>
                     <label >Password *</label>
                     <input type="password" placeholder="Password" name="student_password" class="form-control"><br>
@@ -43,7 +43,7 @@ if (isset($student)) {
                     <p style="color:#9C9C9C;margin-top: 5px"><i>Password minimal 6 karakter</i></p>
                 <?php endif; ?>
                 <label >Tempat Lahir *</label>
-                <input name="student_place_birth" <?php echo (isset($student) ? 'disabled' : '') ?> placeholder="Tempat Lahir" type="text" class="form-control" value="<?php echo $inputPlace; ?>"><br>
+                <input name="student_place_birth" placeholder="Tempat Lahir" type="text" class="form-control" value="<?php echo $inputPlace; ?>"><br>
                 <label >Tanggal Lahir *</label>
                 <input name="student_birth_date" placeholder="Tanggal Lahir" type="text" class="form-control datepicker" value="<?php echo $inputBirth; ?>"><br>
                 <label >No. Telepon *</label>
