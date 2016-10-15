@@ -26,35 +26,33 @@ class Profile extends CI_Controller {
     // User_customer view in list
     public function index($offset = NULL) {
         $id = $this->session->userdata('student_id');
+        $this->load->model('Input_transaction_model');
         if ($this->Student_model->get(array('id' => $id)) == NULL) {
             redirect('student/user');
         }
         $data['student'] = $this->Student_model->get(array('id' => $id));
+        $data['transaksi'] = $this->Input_transaction_model->get(array('student_id' => $id));
+        $data['tunggakan'] = $this->Input_transaction_model->get(array('student_id' => $id, 'status_null' => TRUE));
+        $data['lunas'] = $this->Input_transaction_model->get(array('student_id' => $id, 'status' => TRUE));
         $data['title'] = 'Detail Profil';
         $data['main'] = 'student/profile/profile_detail';
         $this->load->view('student/layout', $data);
     }
 
     // Add User_customer and Update
-    public function edit($id = NULL) {
+    public function edit() {
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('student_name', 'Nama Lengkap', 'trim|required|xss_clean');
         $this->form_validation->set_rules('student_place_birth', 'Tempat Lahir', 'trim|required|xss_clean');
         $this->form_validation->set_rules('student_birth_date', 'Tanggal Lahir', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('student_phone', 'No TLP', 'trim|required|xss_clean');        
+        $this->form_validation->set_rules('student_phone', 'No TLP', 'trim|required|xss_clean');
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>', '</div>');
-        $data['operation'] = 'Sunting';
 
+        $id = $this->session->userdata('student_id');
         if ($_POST AND $this->form_validation->run() == TRUE) {
+            $params['student_id'] = $id;
 
-            if ($this->input->post('student_id')) {
-                $params['student_id'] = $this->input->post('student_id');
-            } else {
-                $params['student_input_date'] = date('Y-m-d H:i:s');
-            }
-
-            $params['user_id'] = $this->session->userdata('user_id');
             $params['student_last_update'] = date('Y-m-d H:i:s');
             $params['student_nip'] = $this->input->post('student_nip');
             $params['student_name'] = $this->input->post('student_name');
@@ -65,22 +63,16 @@ class Profile extends CI_Controller {
             $params['student_email'] = $this->input->post('student_email');
             $params['student_address'] = $this->input->post('student_address');
             $status = $this->Student_model->add($params);
-           
 
-            $this->session->set_flashdata('success', $data['operation'] . ' Pelajar berhasil');
-            redirect('admin/student');
+
+            $this->session->set_flashdata('success',  'Sunting Profil berhasil');
+            redirect('student/profile');
         } else {
-            if ($this->input->post('student_id')) {
-                redirect('admin/student/edit/' . $this->input->post('student_id'));
-            }
-
             // Edit mode
-            if (!is_null($id)) {
-                $data['student'] = $this->Student_model->get(array('id' => $id));
-            }
-            $data['title'] = $data['operation'] . ' Pelajar';
-            $data['main'] = 'admin/student/student_add';
-            $this->load->view('admin/layout', $data);
+            $data['student'] = $this->Student_model->get(array('id' => $id));
+            $data['title'] =  'Sunting Profil';
+            $data['main'] = 'student/profile/profile_edit';
+            $this->load->view('student/layout', $data);
         }
     }
 
@@ -102,7 +94,7 @@ class Profile extends CI_Controller {
         $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $config['max_size'] = '32000';
         $config['file_name'] = $nip;
-                $this->upload->initialize($config);
+        $this->upload->initialize($config);
 
         if (!$this->upload->do_upload($name)) {
 //            echo $config['upload_path'];

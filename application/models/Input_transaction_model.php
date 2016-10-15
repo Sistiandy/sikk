@@ -35,7 +35,12 @@ class Input_transaction_model extends CI_Model {
         
         if(isset($params['status']))
         {
-            $this->db->where('input_transaction_value !=', NULL);
+            $this->db->where('input_transaction_value IS NOT NULL');
+        }
+        
+        if(isset($params['status_null']))
+        {
+            $this->db->where('input_transaction_value IS NULL');
         }
 
         if(isset($params['limit']))

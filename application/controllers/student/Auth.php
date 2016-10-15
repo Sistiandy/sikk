@@ -27,7 +27,7 @@ class Auth extends CI_Controller {
 
     function login() {
         if ($this->session->userdata('logged_student')) {
-            redirect('student');
+            redirect('student/profile');
         }
         $this->form_validation->set_rules('nip', 'Nip', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
