@@ -63,7 +63,7 @@ class Input_transaction_model extends CI_Model {
         }
 
         $this->db->select('input_transaction.transaction_id, input_transaction_value,
-            transaction_input_date, transaction_last_update');
+            transaction_input_date, transaction_last_update, student_id');
         $this->db->select('input_transaction.user_user_id, user_name');
         $this->db->select('periode_periode_id, periode_date, periode_description');
         $this->db->select('student_student_id, student_name, student_nip');
