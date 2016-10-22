@@ -144,12 +144,6 @@
                         "oLanguage": {
                             "sSearch": "Pencarian :"
                         },
-                        "aoColumnDefs": [
-                            {
-                                'bSortable': false,
-                                'aTargets': [-1]
-                            } //disables sorting for last column
-                        ],
                         "bPaginate": false
                     });
                 }
