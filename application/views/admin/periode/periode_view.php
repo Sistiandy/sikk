@@ -47,7 +47,7 @@
                 </table>
             </div>
         </div>         
-        
+
     </div>
     <div class="x_panel">
         <div class="x_title">
@@ -60,35 +60,35 @@
         </div>
         <div class="x_content">
             <div class="row">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th class="controls" align="center">NO</th>
-                                <th class="controls" align="center">MAHASISWA</th>
-                                <th class="controls" align="center">NIP</th>
-                                <th class="controls" align="center">KETERANGAN <span ng-show="animate" class="fa fa-spin fa-spinner"></span></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="studentTransaction in studentTransactions">
-                                <td >{{$index + 1}}</td>
-                                <td >{{studentTransaction.student_name}}</td>
-                                <td >{{studentTransaction.student_nip}}</td>
-                                <td ng-show="studentTransaction.input_transaction_value == NULL">
-                                            <button class="btn btn-success btn-xs" ng-click="inputTransaction(studentTransaction)" type="button"><i class="fa fa-check"></i> Bayar</button>
+                <div class="col-md-12">
+                    <div>
+                        <table class="table table-striped" id="example">
+                            <thead>
+                                <tr>
+                                    <th class="controls" align="center">NO</th>
+                                    <th class="controls" align="center">MAHASISWA</th>
+                                    <th class="controls" align="center">NIP</th>
+                                    <th class="controls" align="center">KETERANGAN <span ng-show="animate" class="fa fa-spin fa-spinner"></span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="studentTransaction in studentTransactions">
+                                    <td >{{$index + 1}}</td>
+                                    <td >{{studentTransaction.student_name}}</td>
+                                    <td >{{studentTransaction.student_nip}}</td>
+                                    <td ng-show="studentTransaction.input_transaction_value == NULL">
+                                        <button class="btn btn-success btn-xs" ng-click="inputTransaction(studentTransaction)" type="button"><i class="fa fa-check"></i> Bayar</button>
 
-                                </td>
-                                <td ng-show="studentTransaction.input_transaction_value != NULL">
-                                    <label><span class="ion-checkmark"></span> Sudah bayar</label>
-                                </td>
-                            </tr>
-                        </tbody>                            
-                    </table>
+                                    </td>
+                                    <td ng-show="studentTransaction.input_transaction_value != NULL">
+                                        <label><span class="ion-checkmark"></span> Sudah bayar</label>
+                                    </td>
+                                </tr>
+                            </tbody>                            
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 </div>
@@ -96,7 +96,7 @@
 <script>
     var inputApp = angular.module("inputApp", []);
     var SITEURL = "<?php echo site_url() ?>";
-    inputApp.controller('transactionCtrl', function ($scope, $http) {
+    inputApp.controller('transactionCtrl', function ($scope, $http, $timeout) {
         $scope.studentTransactions = [];
         $scope.periode = [];
         $scope.animate = false;
@@ -104,7 +104,9 @@
 
             var url = SITEURL + 'api/getPeriodeTransaction/<?php echo $periode['periode_id'] ?>';
             $http.get(url).then(function (response) {
+                console.log(response.data);
                 $scope.studentTransactions = response.data;
+                $scope.initDataTable();
             })
 
         };
@@ -133,6 +135,26 @@
                 }
             });
         };
+        $scope.initDataTable = function () {
+            $timeout(function () {
+                var rowCount = $("#example tr").length;
+                if (rowCount >= 0) {
+                    $("#example").dataTable({
+                        "aaSorting": [],
+                        "oLanguage": {
+                            "sSearch": "Pencarian :"
+                        },
+                        "aoColumnDefs": [
+                            {
+                                'bSortable': false,
+                                'aTargets': [-1]
+                            } //disables sorting for last column
+                        ],
+                        "bPaginate": false
+                    });
+                }
+            }, 200)
+        }
         angular.element(document).ready(function () {
             $scope.getStudentTransaction();
             $scope.getPeriode();
