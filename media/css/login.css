@@ -9,53 +9,62 @@
 	padding: 0px;
 }
 
-	.spasi {
-		background-color: #fff;
-		min-height: 300px;
-		padding: 10px;
-		border-bottom: 0px;
-		border-left: 0px;
-		border-right: 0px;
-		border-radius: 5px;
-	}
-	.spasibawah{
-		margin-top: 90px;
-	}
+.spasi {
+	background-color: #fff;
+	min-height: 300px;
+	padding: 10px;
+	border-bottom: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-radius: 5px;
+}
+.spasibawah{
+	margin-top: 90px;
+}
 
-	.textjudul {
-		margin-top: 20px;
-		margin-bottom: 20px;
-		color: #ffffff;
+.textjudul {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	color: #ffffff;
 
-	}
-	.kotak {
-		height: 60px;
-		background-color: #fff;
-		border-radius: 10px;
-		border: 1px solid #446CB3;
-		margin-top: 10px;
-	}
-	
+}
+.kotak {
+	height: 60px;
+	background-color: #fff;
+	border-radius: 10px;
+	border: 1px solid #446CB3;
+	margin-top: 10px;
+}
 
-	    /*  button login  */
+.warning {
+	height: 35px;
+	padding: 1px;
+	background-color: #CF000F;
+	border-radius: 5px;
+	color: #fff;
+	margin-top: 10px;
+}
 
-		.btn-login {
-			font-family:"Roboto Thin";
-		    font-size: 20px;
-		    border-radius: 10px;
-		    padding: 15px;
-		    color: #fff;
-		    background-color: #446CB3;
-		   
-		}
-		.btn-login:hover, .btn-sky.active:focus, .btn-login:focus, .open>.dropdown-toggle.btn-login {
-		    color: #FFF;
-		    background-color: #59ABE3;
-		    outline: none;
-		}
 
-		/*end button*/
-		
+/*  button login  */
+
+.btn-login {
+	font-family:"Roboto Thin";
+	font-size: 20px;
+	border-radius: 10px;
+	padding: 15px;
+	color: #fff;
+	background-color: #446CB3;
+
+}
+.btn-login:hover, .btn-sky.active:focus, .btn-login:focus, .open>.dropdown-toggle.btn-login {
+	color: #FFF;
+	background-color: #59ABE3;
+	outline: none;
+}
+
+/*end button*/
+
 
 
 /*Load Fonts*/

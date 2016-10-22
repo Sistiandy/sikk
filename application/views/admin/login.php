@@ -12,6 +12,7 @@
     <!-- Bootstrap core CSS --> 
     <link href="<?php echo media_url() ?>/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo media_url() ?>/css/login.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo media_url() ?>/fonts/css/font-awesome.min.css" rel="stylesheet">
 
     <!--  Java Script  -->
     <script src="<?php echo media_url() ?>/js/jquery.min.js"></script>
@@ -68,30 +69,31 @@
                         }
                         echo '" />';
                     } ?>
-
-                    <div class="form-group">
-                        <input type="text" autofocus name="username" required class="kotak form-control" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password" required class="kotak form-control" placeholder="Password">
-                    </div>
-                    <button class="btn btn-login btn-lg col-sm-12 col-xs-12" type="submit">LOGIN</button>
-                    <?php echo form_close(); ?>
-
                     <!-- Jika Error -->
                     <?php if ($this->session->flashdata('failed')) { ?>
-                        <div class="row"><center> <?php echo $this->session->flashdata('failed') ?></center></div>
+                        <div class="warning">
+                        <center><h5><i class="fa fa-exclamation-triangle"></i> <?php echo $this->session->flashdata('failed') ?></h5></center>
+                        </div>
                         <?php } ?>
 
-                        <!-- Footer -->
-                        <div class="row spasibawah">
-                            <div class="col-md-12">                            
-                                <center>&copy; <?php echo pretty_date(date('Y-m-d'), 'Y',FALSE) ?> All Rights Reserved. TI Unindra&trade;</center>
+                        <div class="form-group">
+                            <input type="text" autofocus name="username" required class="kotak form-control" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" required class="kotak form-control" placeholder="Password">
+                        </div>
+                        <button class="btn btn-login btn-lg col-sm-12 col-xs-12" type="submit">LOGIN</button>
+                        <?php echo form_close(); ?>
+
+                            <!-- Footer -->
+                            <div class="row spasibawah">
+                                <div class="col-md-12">                            
+                                    <center>&copy; <?php echo pretty_date(date('Y-m-d'), 'Y',FALSE) ?> All Rights Reserved. TI Unindra&trade;</center>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </body>
-</html>
+        </body>
+        </html>

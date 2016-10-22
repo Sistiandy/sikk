@@ -12,6 +12,7 @@
     <!-- Bootstrap core CSS --> 
     <link href="<?php echo media_url() ?>/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo media_url() ?>/css/login.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo media_url() ?>/fonts/css/font-awesome.min.css" rel="stylesheet">
 
     <!--  Java Script  -->
     <script src="<?php echo media_url() ?>/js/jquery.min.js"></script>
@@ -68,6 +69,12 @@
                         }
                         echo '" />';
                     } ?>
+                    <!-- Jika error -->
+                    <?php if ($this->session->flashdata('failed')) { ?>
+                        <div class="warning">
+                        <center><h5><i class="fa fa-exclamation-triangle"></i> <?php echo $this->session->flashdata('failed') ?></h5></center>
+                        </div>
+                        <?php } ?>
 
                     <div class="form-group">
                         <input type="text" autofocus name="nip" required class="kotak form-control" placeholder="NPM">
@@ -77,11 +84,6 @@
                     </div>
                     <button class="btn btn-login btn-lg col-sm-12 col-xs-12" type="submit">LOGIN</button>
                     <?php echo form_close(); ?>
-
-                    <!-- Jika Error -->
-                    <?php if ($this->session->flashdata('failed')) { ?>
-                        <div class="row"><center> <?php echo $this->session->flashdata('failed') ?></center></div>
-                        <?php } ?>
 
                         <!-- Footer -->
                         <div class="row spasibawah">
