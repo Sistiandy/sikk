@@ -8,8 +8,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>SYSCMS <?php echo isset($title) ? ' | ' . $title : null; ?></title>
-        <link rel="icon" href="<?php echo media_url('ico/favicon.jpg'); ?>" type="image/x-icon">
+        <title><?php echo (class_name() != '-') ? class_name() : 'SYSCMS'; ?> <?php echo isset($title) ? ' | ' . $title : null; ?></title>
+        <link rel="icon" href="<?php echo media_url('images/favicon.png'); ?>" type="image/x-icon">
 
         <!-- Bootstrap core CSS -->
 

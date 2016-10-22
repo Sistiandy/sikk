@@ -215,7 +215,7 @@ body.nav-md .container.body .right_col {
 .nav_title {
     width: 230px;
     float: left;
-    background: #2A3F54;
+    background: #446CB3;
     border-radius: 0;
     height: 57px;
 }
@@ -370,7 +370,7 @@ dark,
 
 body {
     color: #73879C;
-    background: #2A3F54;
+    background: #446CB3;
     /*#ECF0F1; #FCFCFC*/
     
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
@@ -687,7 +687,7 @@ a:focus {
 }
 
 .nav.child_menu li:hover {
-    background-color: rgba(255, 255, 255, 0.06);
+    background-color: #4183D7;
 }
 
 .nav.child_menu li {
@@ -742,15 +742,7 @@ li.current-page {
 
 .nav.side-menu> li.active > a {
     color: #ff0000;
-    text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 0;
-    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5b6479), color-stop(100%, #4c5566)), #686e78;
-    background: -webkit-linear-gradient(#334556, #2C4257), #2A3F54;
-    background: -moz-linear-gradient(#334556, #2C4257), #2A3F54;
-    background: -o-linear-gradient(#334556, #2C4257), #2A3F54;
-    background: linear-gradient(#334556, #2C4257), #2A3F54;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
-    -moz-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
-    box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
+    background-color: #1F3A93;
 }
 
 li.current-page a {
@@ -1383,7 +1375,7 @@ table.jambo_table {
 }
 
 table.jambo_table thead {
-    background: rgba(52, 73, 94, 0.94);
+    background: #446CB3;
     color: #ECF0F1;
 }
 
@@ -1903,7 +1895,7 @@ span.right {
     position: fixed;
     width: 230px;
     z-index: 1000;
-    background: #2A3F54;
+    background: #446CB3;
 }
 
 .main-footer {
@@ -1925,11 +1917,11 @@ span.right {
     font-size: 17px;
     display: block;
     float: left;
-    background: #172D44;
+    background: #1F3A93;
 }
 
 .sidebar-footer a:hover {
-    background: #425567;
+    background: #4183D7;
 }
 
 .sidebar-footer button {

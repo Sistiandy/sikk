@@ -72,15 +72,15 @@ class Auth extends CI_Controller {
                 }
             } else {
                 if ($lokasi != '') {
-                    $this->session->set_flashdata('failed', 'Sorry, username and password do not match');
+                    $this->session->set_flashdata('failed', 'Maaf, username dan password tidak cocok');
                     header("Location:" . site_url('admin/auth/login') . "?location=" . urlencode($lokasi));
                 } else {
-                    $this->session->set_flashdata('failed', 'Sorry, username and password do not match');
+                    $this->session->set_flashdata('failed', 'Maaf, username dan password tidak cocok');
                     redirect('admin/auth/login');
                 }
             }
         } else {
-            $this->session->set_flashdata('failed', 'Sorry, username and password are not complete');
+            $this->session->set_flashdata('failed', 'Maaf, username dan password tidak lengkap');
             redirect('admin/auth/login');
         }
     }

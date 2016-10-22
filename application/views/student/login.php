@@ -1,90 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Unindra Kas | Login Mahasiswa</title>
+    <link rel="icon" href="<?php echo media_url('images/favicon.png'); ?>" type="image/x-icon">
 
-    <title>SYSCMS | LOGIN MAHASISWA</title>
-    <link rel="icon" href="<?php echo media_url('ico/favicon.jpg'); ?>" type="image/x-icon">
-
-    <!-- Bootstrap core CSS -->
-
+    <!-- Bootstrap core CSS --> 
     <link href="<?php echo media_url() ?>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo media_url() ?>/css/login.css" rel="stylesheet" type="text/css">
 
-    <link href="<?php echo media_url() ?>/fonts/css/font-awesome.min.css" rel="stylesheet">
-    <link href="<?php echo media_url() ?>/css/animate.min.css" rel="stylesheet">
-
-    <!-- Custom styling plus plugins -->
-    <link href="<?php echo media_url() ?>/css/custom.css" rel="stylesheet">
-
+    <!--  Java Script  -->
     <script src="<?php echo media_url() ?>/js/jquery.min.js"></script>
+    <link href="<?php echo media_url() ?>/css/animate.min.css" rel="stylesheet">
+    <script src="<?php echo media_url() ?>/js/bootstrap.min.js" type="text/javascript"></script>
 
-        <!--[if lt IE 9]>
-            <script src="../assets/js/ie8-responsive-file-warning.js"></script>
-            <![endif]-->
+    <!-- Style body -->
+    <style type="text/css" media="screen">
+        html {
+        }
 
-            <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-              <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-              <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-              <![endif]-->
+        html, body {
+            background-color: #fff;
+            color: #000;
+            font-family:"Open Sans";
+            overflow-x: hidden;
+        }
 
-          </head>
+        a {
+            color: #FF6F69;
+        }
+        a:hover {
+            text-decoration: none;
+            color: #E0625C;
+        }
+        
+    </style>
 
-          <body role="login"><br><br><br>
+</head>
 
-            <div class="col-md-12 col-lg-3 col-sm-12 col-xs-12 center-margin">
+<body>
 
-                <div class="panel panel-default">
+    <div class="container-fluid headerr">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4"><br>
+                <center>
+                    <img src="<?php echo media_url() ?>/images/informatika.png" height="400" width="150" class="img-responsive">
+                    <p class="textjudul">Login Mahasiswa Unindra Teknik Informatika Kelas E</p>
+                </center>
+            </div>
+        </div>
+    </div>
 
-                  <div class="panel-body">
-                    <section class="login_content">
-                        <form role="form" action="<?php echo site_url('student/auth/login') ?>" method="post">
-                            <?php
-                            echo form_open(current_url(), array('role' => 'form', 'class' => 'form-signin'));
-                            if (isset($_GET['location'])) {
-                                echo '<input type="hidden" name="location" value="';
-                                if (isset($_GET['location'])) {
-                                    echo htmlspecialchars($_GET['location']);
-                                }
-                                echo '" />';
-                            }
-                            ?>
-                            <h1>Mahasiswa</h1>                            
-                            <div class="row">
-                            <div class="center-block"> <img width=270 height=250 src="<?php echo media_url() ?>/images/unindra.png" alt="">
-                                </div>
-                                <hr>
-                                <div>
-                                    <input autofocus type="text" class="form-control" placeholder="NIP" name="nip" required="" />
-                                </div>
-                                <div>
-                                    <input type="password" class="form-control" placeholder="Password" name="password" required="" />
-                                </div>
-                                <div>
-                                    <button class="sun-flower-button" type="submit" >Login</button>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="separator">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="spasi">
+                    <?php echo form_open('student/auth/login'); ?>
+                    <?php
+                    if (isset($_GET['location'])) {
+                        echo '<input type="hidden" name="location" value="';
+                        if (isset($_GET['location'])) {
+                            echo htmlspecialchars($_GET['location']);
+                        }
+                        echo '" />';
+                    } ?>
 
-                                    <div class="clearfix"></div>
-                                    <br />
-                                    <div>
-                                        <p>© <?php echo pretty_date(date('Y-m-d'), 'Y',FALSE) ?> All Rights Reserved Privacy and Terms</p>
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- form -->
-                        </section>
-                        <!-- content -->
+                    <div class="form-group">
+                        <input type="text" autofocus name="nip" required class="kotak form-control" placeholder="NPM">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" required class="kotak form-control" placeholder="Password">
+                    </div>
+                    <button class="btn btn-login btn-lg col-sm-12 col-xs-12" type="submit">LOGIN</button>
+                    <?php echo form_close(); ?>
+
+                    <!-- Jika Error -->
+                    <?php if ($this->session->flashdata('failed')) { ?>
+                        <div class="row"><center> <?php echo $this->session->flashdata('failed') ?></center></div>
+                        <?php } ?>
+
+                        <!-- Footer -->
+                        <div class="row spasibawah">
+                            <div class="col-md-12">                            
+                                <center>&copy; <?php echo pretty_date(date('Y-m-d'), 'Y',FALSE) ?> All Rights Reserved. TI Unindra&trade;</center>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-        </body>
-
-        </html>
+        </div>
+    </body>
+</html>

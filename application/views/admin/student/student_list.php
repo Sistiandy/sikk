@@ -4,7 +4,7 @@
             <h3>Mahasiswa <small>List</small></h3>
             <ul class="nav navbar-right panel_toolbox">
                 <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                <li class="pull-right"><a href="<?php echo site_url('admin/student/add'); ?>" class="btn btn-xs btn-success"><i class="fa fa-plus-circle"></i> Tambah</a>
+                <li class="pull-right"><a href="<?php echo site_url('admin/student/add'); ?>" class="btn btn-xs btn-success"><i class="fa fa-plus-circle"></i> Tambah</a> 
                 </li>
             </ul>
             <div class="clearfix"></div>
@@ -26,7 +26,7 @@
                             ?>
                             <tr>
                                 <td ><?php echo $row['student_nip']; ?></td>
-                                <td ><?php echo $row['student_name']; ?></td>
+                                <td ><span class="cap"><?php echo $row['student_name']; ?></span></td>
                                 <td ><?php echo $row['student_email']; ?></td>
                                 <td>
                                     <a class="text-warning" href="<?php echo site_url('admin/student/detail/' . $row['student_id']); ?>" ><span class="glyphicon glyphicon-eye-open"></span></a>
@@ -42,3 +42,10 @@
         </div>
     </div>
 </div>
+
+<style type="text/css">
+     .upper { text-transform: uppercase; }
+     .lower { text-transform: lowercase; }
+     .cap   { text-transform: capitalize; }
+     .small { font-variant:   small-caps; }
+ </style>

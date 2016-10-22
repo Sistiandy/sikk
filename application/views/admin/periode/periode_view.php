@@ -74,7 +74,7 @@
                             <tbody>
                                 <tr ng-repeat="studentTransaction in studentTransactions">
                                     <td >{{$index + 1}}</td>
-                                    <td >{{studentTransaction.student_name}}</td>
+                                    <td ><span class="cap">{{studentTransaction.student_name}}</span></td>
                                     <td >{{studentTransaction.student_nip}}</td>
                                     <td ng-show="studentTransaction.input_transaction_value == NULL">
                                         <button class="btn btn-success btn-xs" ng-click="inputTransaction(studentTransaction)" type="button"><i class="fa fa-check"></i> Bayar</button>
@@ -161,3 +161,10 @@
         });
     });
 </script>
+
+<style type="text/css">
+     .upper { text-transform: uppercase; }
+     .lower { text-transform: lowercase; }
+     .cap   { text-transform: capitalize; }
+     .small { font-variant:   small-caps; }
+ </style>
