@@ -67,14 +67,14 @@
                                 <tr>
                                     <th class="controls" align="center">NO</th>
                                     <th class="controls" align="center">MAHASISWA</th>
-                                    <th class="controls" align="center">NIP</th>
+                                    <th class="controls" align="center">NPM</th>
                                     <th class="controls" align="center">KETERANGAN <span ng-show="animate" class="fa fa-spin fa-spinner"></span></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="studentTransaction in studentTransactions">
                                     <td >{{$index + 1}}</td>
-                                    <td ><span class="cap">{{studentTransaction.student_name}}</span></td>
+                                    <td ><span class="cap"><a href="<?php echo site_url() ?>admin/student/detail/{{studentTransaction.student_id}}"><b>{{studentTransaction.student_name}}</b></a></span></td>
                                     <td >{{studentTransaction.student_nip}}</td>
                                     <td ng-show="studentTransaction.input_transaction_value == NULL">
                                         <button class="btn btn-success btn-xs" ng-click="inputTransaction(studentTransaction)" type="button"><i class="fa fa-check"></i> Bayar</button>
