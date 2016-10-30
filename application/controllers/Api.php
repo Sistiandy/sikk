@@ -35,7 +35,7 @@ class Api extends CI_Controller {
 
     public function getStudentTransaction($id = NULL) {
         $this->load->model('Input_transaction_model');
-        $res = $this->Input_transaction_model->get(array('student_id' => $id));
+        $res = $this->Input_transaction_model->get(array('limit_date' => TRUE,'student_id' => $id));
 
         $this->output
                 ->set_content_type('application/json')

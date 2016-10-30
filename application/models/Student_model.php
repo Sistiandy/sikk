@@ -153,4 +153,9 @@ class Student_model extends CI_Model {
         $this->db->update('student');
     }
 
+    function change_password($id, $params) {
+        $this->db->where('student_id', $id);
+        $this->db->update('student', $params);
+    }
+
 }

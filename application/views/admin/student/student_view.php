@@ -152,22 +152,6 @@
                         })
 
                         };
-                        $scope.inputTransaction = function (data) {
-                        $scope.animate = true;
-                                var postData = $.param({
-                                transaction_id: data.transaction_id,
-                                        periode_id: data.periode_periode_id,
-                                });
-                                $.ajax({
-                                method: "POST",
-                                        url: SITEURL + "admin/input_transaction/input",
-                                        data: postData,
-                                        success: function (response) {
-                                        $scope.animate = false;
-                                                $scope.getStudentTransaction();
-                                        }
-                                });
-                        };
                         angular.element(document).ready(function () {
                 $scope.getStudentTransaction();
                 });

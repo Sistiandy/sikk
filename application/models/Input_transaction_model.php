@@ -42,6 +42,11 @@ class Input_transaction_model extends CI_Model {
         {
             $this->db->where('input_transaction_value IS NULL');
         }
+        
+        if(isset($params['limit_date']))
+        {
+            $this->db->where('transaction_input_date <= ', date('Y-m-d'));
+        }
 
         if(isset($params['limit']))
         {

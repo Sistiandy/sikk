@@ -28,6 +28,9 @@ class User_model extends CI_Model {
         if (isset($params['user_id'])) {
             $this->db->where('user.user_id', $params['user_id']);
         }
+        if (isset($params['password'])) {
+            $this->db->where('user.user_password', $params['password']);
+        }
         if (isset($params['name'])) {
             $this->db->like('user_name', $params['name']);
         }

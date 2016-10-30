@@ -5,6 +5,7 @@
                 Detail Profil
                 <span class=" pull-right">
                     <a href="<?php echo site_url('admin/profile/edit/') ?>" class="btn btn-success btn-sm"><span class="fa fa-edit"></span>&nbsp; Edit</a> 
+                    <a href="<?php echo site_url('admin/profile/cpw') ?>" class="btn btn-sm btn-success"><i class="fa fa-refresh"></i>&nbsp; Ubah Password</a> 
                 </span>
             </h3><br>
         </div>

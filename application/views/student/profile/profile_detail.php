@@ -6,36 +6,37 @@
 </style>
 <?php
 $jmlLunas = count($lunas);
-$jmlTransaksi=  count($transaksi);
-$jmlTunggakan=  count($tunggakan);
-$persenLunas = $jmlLunas/$jmlTransaksi * 100;
+$jmlTransaksi = count($transaksi);
+$jmlTunggakan = count($tunggakan);
+$persenLunas = $jmlLunas / $jmlTransaksi * 100;
 ?>
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
     <div class="x_panel post-inherit">
         <div class="row x_title">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <h3>
                     Profile Mahasiswa
                 </h3>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <span class=" pull-right">
                     <a href="<?php echo site_url('student/dashboard') ?>" class="btn btn-info"><i class="fa fa-arrow-left"></i>&nbsp; Kembali</a> 
                     <a href="<?php echo site_url('student/profile/edit') ?>" class="btn btn-success"><i class="fa fa-edit"></i>&nbsp; Edit</a> 
+                    <a href="<?php echo site_url('student/profile/cpw') ?>" class="btn btn-success"><i class="fa fa-refresh"></i>&nbsp; Ubah Password</a> 
                 </span>
             </div>
         </div>
         <div class="row x_content">
             <div class="col-md-12">
                 <div class="progress progress-bar-gray">
-                    <?php if($jmlTunggakan > 0){ ?>
-                    <div class="progress-bar bg-red" role="progressbar" aria-valuenow="<?php echo $persenLunas ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $persenLunas ?>%; border-radius: 0;">
-                        <?php echo $persenLunas ?>% Lunas Uang Kas
-                    </div>
-                    <?php }else{ ?>
-                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; border-radius: 0;">
-                        100% Lunas Uang Kas
-                    </div>
+                    <?php if ($jmlTunggakan > 0) { ?>
+                        <div class="progress-bar bg-red" role="progressbar" aria-valuenow="<?php echo $persenLunas ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $persenLunas ?>%; border-radius: 0;">
+                            <?php echo $persenLunas ?>% Lunas Uang Kas
+                        </div>
+                    <?php } else { ?>
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; border-radius: 0;">
+                            100% Lunas Uang Kas
+                        </div>
                     <?php } ?>
                 </div>
             </div>
@@ -117,7 +118,8 @@ $persenLunas = $jmlLunas/$jmlTransaksi * 100;
                                                 </center>
                                             </div>
                                         </div>
-                                    <?php endforeach;
+                                        <?php
+                                    endforeach;
                                 } else {
                                     ?>
 
@@ -128,7 +130,7 @@ $persenLunas = $jmlLunas/$jmlTransaksi * 100;
                                             </center>
                                         </div>
                                     </div>
-<?php } ?>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -137,3 +139,4 @@ $persenLunas = $jmlLunas/$jmlTransaksi * 100;
 
         </div>
     </div>
+</div>

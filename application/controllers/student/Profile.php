@@ -31,9 +31,9 @@ class Profile extends CI_Controller {
             redirect('student/user');
         }
         $data['student'] = $this->Student_model->get(array('id' => $id));
-        $data['transaksi'] = $this->Input_transaction_model->get(array('student_id' => $id));
-        $data['tunggakan'] = $this->Input_transaction_model->get(array('student_id' => $id, 'status_null' => TRUE));
-        $data['lunas'] = $this->Input_transaction_model->get(array('student_id' => $id, 'status' => TRUE));
+        $data['transaksi'] = $this->Input_transaction_model->get(array('limit_date' => TRUE, 'student_id' => $id));
+        $data['tunggakan'] = $this->Input_transaction_model->get(array('limit_date' => TRUE, 'student_id' => $id, 'status_null' => TRUE));
+        $data['lunas'] = $this->Input_transaction_model->get(array('limit_date' => TRUE, 'student_id' => $id, 'status' => TRUE));
         $data['title'] = 'Detail Profil';
         $data['main'] = 'student/profile/profile_detail';
         $this->load->view('student/layout', $data);
@@ -65,12 +65,12 @@ class Profile extends CI_Controller {
             $status = $this->Student_model->add($params);
 
 
-            $this->session->set_flashdata('success',  'Sunting Profil berhasil');
+            $this->session->set_flashdata('success', 'Sunting Profil berhasil');
             redirect('student/profile');
         } else {
             // Edit mode
             $data['student'] = $this->Student_model->get(array('id' => $id));
-            $data['title'] =  'Sunting Profil';
+            $data['title'] = 'Sunting Profil';
             $data['main'] = 'student/profile/profile_edit';
             $this->load->view('student/layout', $data);
         }
@@ -113,12 +113,20 @@ class Profile extends CI_Controller {
         $this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|xss_clean|min_length[6]|matches[password]');
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>', '</div>');
         if ($_POST AND $this->form_validation->run() == TRUE) {
-            $id = $this->input->post('student_id');
-            $params['password'] = sha1($this->input->post('password'));
-            $status = $this->Student_model->change_password($id, $params);
+            $id = $this->session->userdata('student_id');
 
-            $this->session->set_flashdata('success', 'Ubah Password Berhasil');
-            redirect('student/profile');
+            $currenPass = sha1($this->input->post('member_current_password'));
+            $params['student_password'] = sha1($this->input->post('password'));
+            $check = $this->Student_model->get(array('id' => $id, 'password' => $currenPass));
+            if ($check != NULL) {
+                $status = $this->Student_model->change_password($id, $params);
+
+                $this->session->set_flashdata('success', 'Ubah Password Berhasil');
+                redirect('student/profile');
+            } else {
+                $this->session->set_flashdata('failed', 'Password lama yang dimasukkan salah');
+                redirect('student/profile/cpw');
+            }
         } else {
             if ($this->Student_model->get(array('id' => $id)) == NULL) {
                 redirect('student/profile');

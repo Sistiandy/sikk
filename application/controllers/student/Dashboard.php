@@ -22,6 +22,15 @@ class Dashboard extends CI_Controller {
     // Dashboard View
     public function index()
     {
+        
+        $this->load->model('Input_transaction_model');
+        $this->load->model('Student_model');
+        
+        $id = $this->session->userdata('student_id');
+        $data['student'] = $this->Student_model->get(array('id' => $id));
+        $data['transaksi'] = $this->Input_transaction_model->get(array('limit_date' => TRUE, 'student_id' => $id));
+        $data['tunggakan'] = $this->Input_transaction_model->get(array('limit_date' => TRUE, 'student_id' => $id, 'status_null' => TRUE));
+        $data['lunas'] = $this->Input_transaction_model->get(array('limit_date' => TRUE, 'student_id' => $id, 'status' => TRUE));
         $data['title'] = 'Dashboard';
         $data['main'] = 'student/dashboard/dashboard';
         $this->load->view('student/layout', $data);

@@ -61,7 +61,7 @@ class Profile extends CI_Controller {
                         'user_id' => $this->session->userdata('user_id'),
                         'log_module' => 'User',
                         'log_action' => 'Sunting',
-                        'log_info' => 'ID:'.$status.';Title:' . $this->input->post('user_name')
+                        'log_info' => 'ID:' . $status . ';Title:' . $this->input->post('user_name')
                     )
             );
 
@@ -86,21 +86,28 @@ class Profile extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>', '</div>');
         if ($_POST AND $this->form_validation->run() == TRUE) {
             $id = $this->input->post('user_id');
+            $currenPass = sha1($this->input->post('user_current_password'));
             $params['user_password'] = sha1($this->input->post('user_password'));
-            $status = $this->User_model->change_password($id, $params);
+            $check = $this->User_model->get(array('id' => $id, 'password' => $currenPass));
+            if ($check != NULL) {
+                $status = $this->User_model->change_password($id, $params);
 
-            // activity log
-            $this->Activity_log_model->add(
-                    array(
-                        'log_date' => date('Y-m-d H:i:s'),
-                        'user_id' => $this->session->userdata('user_id'),
-                        'log_module' => 'User',
-                        'log_action' => 'Ubah Password',
-                        'log_info' => 'ID:null;Title:' . $this->input->post('user_name')
-                    )
-            );
-            $this->session->set_flashdata('success', 'Ubah Password Berhasil');
-            redirect('admin/profile');
+                // activity log
+                $this->Activity_log_model->add(
+                        array(
+                            'log_date' => date('Y-m-d H:i:s'),
+                            'user_id' => $this->session->userdata('user_id'),
+                            'log_module' => 'User',
+                            'log_action' => 'Ubah Password',
+                            'log_info' => 'ID:null;Title:' . $this->input->post('user_name')
+                        )
+                );
+                $this->session->set_flashdata('success', 'Ubah Password Berhasil');
+                redirect('admin/profile');
+            } else {
+                $this->session->set_flashdata('failed', 'Password lama yang dimasukkan salah');
+                redirect('admin/profile/cpw');
+            }
         } else {
             if ($this->User_model->get(array('id' => $id)) == NULL) {
                 redirect('admin/profile');
