@@ -15,8 +15,8 @@
             </div>
         </div>
         <div class="row x_content">
-            <div class="col-md-12">
-                <table class="table table-striped">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                <table class="table table-striped table-responsive">
                     <tbody>
                         <tr>
                             <td>Tanggal</td>
@@ -60,9 +60,9 @@
         </div>
         <div class="x_content">
             <div class="row">
-                <div class="col-md-12">
-                    <div>
-                        <table class="table table-striped" id="example">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th class="controls" align="center">NO</th>
@@ -71,7 +71,7 @@
                                     <th class="controls" align="center">KETERANGAN <span ng-show="animate" class="fa fa-spin fa-spinner"></span></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="addTr">
                                 <tr ng-repeat="studentTransaction in studentTransactions">
                                     <td >{{$index + 1}}</td>
                                     <td ><span class="cap"><a href="<?php echo site_url() ?>admin/student/detail/{{studentTransaction.student_id}}"><b>{{studentTransaction.student_name}}</b></a></span></td>
@@ -104,9 +104,7 @@
 
             var url = SITEURL + 'api/getPeriodeTransaction/<?php echo $periode['periode_id'] ?>';
             $http.get(url).then(function (response) {
-                console.log(response.data);
                 $scope.studentTransactions = response.data;
-                $scope.initDataTable();
             })
 
         };
@@ -119,6 +117,7 @@
 
         };
         $scope.inputTransaction = function (data) {
+
             $scope.animate = true;
             var postData = $.param({
                 transaction_id: data.transaction_id,
@@ -135,26 +134,7 @@
                 }
             });
         };
-        $scope.initDataTable = function () {
-            $timeout(function () {
-                var rowCount = $("#example tr").length;
-                if (rowCount >= 0) {
-                    $("#example").dataTable({
-                        "aaSorting": [],
-                        "oLanguage": {
-                            "sSearch": "Pencarian :"
-                        },
-                        "aoColumnDefs": [
-                            {
-                                'bSortable': false,
-                                'aTargets': [-1]
-                            } //disables sorting for last column
-                        ],
-                        "bPaginate": false
-                    });
-                }
-            }, 200)
-        }
+
         angular.element(document).ready(function () {
             $scope.getStudentTransaction();
             $scope.getPeriode();
@@ -163,8 +143,8 @@
 </script>
 
 <style type="text/css">
-     .upper { text-transform: uppercase; }
-     .lower { text-transform: lowercase; }
-     .cap   { text-transform: capitalize; }
-     .small { font-variant:   small-caps; }
- </style>
+    .upper { text-transform: uppercase; }
+    .lower { text-transform: lowercase; }
+    .cap   { text-transform: capitalize; }
+    .small { font-variant:   small-caps; }
+</style>

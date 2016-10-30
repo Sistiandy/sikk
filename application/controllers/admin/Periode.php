@@ -39,7 +39,7 @@ class Periode extends CI_Controller {
         $data['ngapp'] = 'ng-app="inputApp"';
         $data['student'] = $this->Student_model->get();
         $data['periode'] = $this->Periode_model->get(array('id' => $id));
-        $data['transaction'] = $this->Input_transaction_model->get(array('periode_id' => $id));
+        $data['transaction'] = $this->Input_transaction_model->get(array('order_by' => 'student_nip' ,'periode_id' => $id));
         $data['title'] = 'Detail Periode';
         $data['main'] = 'admin/periode/periode_view';
         $this->load->view('admin/layout', $data);

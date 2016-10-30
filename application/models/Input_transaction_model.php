@@ -55,7 +55,7 @@ class Input_transaction_model extends CI_Model {
 
         if(isset($params['order_by']))
         {
-            $this->db->order_by($params['order_by'], 'desc');
+            $this->db->order_by($params['order_by'], 'asc');
         }
         else
         {
